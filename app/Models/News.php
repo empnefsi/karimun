@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'news_id';
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'foreign_id', 'news_id');
+    }
 }
