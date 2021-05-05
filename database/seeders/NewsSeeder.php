@@ -16,8 +16,9 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        $files = Storage::allFiles('public/news');
-        Storage::delete($files);
+        $directory = 'public/news';
+        Storage::deleteDirectory($directory);
+        Storage::makeDirectory($directory);
 
         News::factory(5)
             ->has(
