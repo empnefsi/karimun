@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Carbon\Carbon;
 use Analytics;
 use Spatie\Analytics\Period;
@@ -41,7 +42,8 @@ class HomeController extends Controller
         else{
             $update = ($total - $totalBefore);
         }
-        // dd($total);
-        return view('dashboard', compact(['analytics', 'page', 'user', 'total', 'update']));
+        
+        $news = News::count();
+        return view('dashboard', compact(['analytics', 'page', 'user', 'total', 'update', 'news']));
     }
 }

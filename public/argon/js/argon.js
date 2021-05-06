@@ -1084,6 +1084,44 @@ var UsersChart = (function() {
 						'#fb6340'
 					],
 				}]
+			},
+			options: {
+				plugins: {
+					legend: {
+						display: true,
+						position: 'bottom',
+						labels: {
+							generateLabels: function(chart) {
+								var data = chart.data;
+								return data.labels.map(function(label, i) {
+									var meta = chart.getDatasetMeta(0);
+									var ds = data.datasets[0];
+									var arc = meta.data[i];
+									var custom = arc && arc.custom || {};
+									var getValueAtIndexOrDefault = Chart.helpers.getValueAtIndexOrDefault;
+									var arcOpts = chart.options.elements.arc;
+									var fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+									var stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+									var bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+
+									// We get the value of the current label
+									var value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
+
+									return {
+										// Instead of `text: label,`
+										// We add the value to the string
+										text: label + " : " + value,
+										fillStyle: fill,
+										strokeStyle: stroke,
+										lineWidth: bw,
+										hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+										index: i
+									};
+								});
+							}
+						}
+					}
+				}
 			}
 		});
 
