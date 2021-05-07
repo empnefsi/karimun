@@ -14,7 +14,11 @@ class CreateDestinationsTable extends Migration
     public function up()
     {
         Schema::create('destinations', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('destination_id');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description');
+            $table->string('coordinate');
             $table->timestamps();
         });
     }

@@ -41,6 +41,7 @@ class ImageFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'role' => 'destinations',
+                'path' => 'destinations' . '/' . $this->faker->image(storage_path('app/public/destinations'), 2000, 1500, null, false),
             ];
         });
     }

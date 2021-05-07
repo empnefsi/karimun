@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Destination;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DestinationFactory extends Factory
 {
@@ -21,8 +22,13 @@ class DestinationFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->street();
+
         return [
-            //
+            'name' => $name,
+            'slug' => Str::of($name)->slug('-'),
+            'description' => $this->faker->text(),
+            'coordinate' => $this->faker->latitude() . " " . $this->faker->longitude(),
         ];
     }
 }
