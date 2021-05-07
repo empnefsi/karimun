@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\News;
+use App\Models\Destination;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class NewsFactory extends Factory
+class DestinationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = News::class;
+    protected $model = Destination::class;
 
     /**
      * Define the model's default state.
@@ -22,12 +22,13 @@ class NewsFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence();
-        
+        $name = $this->faker->street();
+
         return [
-            'title' => $title,
-            'slug' => Str::of($title)->slug('-'),
+            'name' => $name,
+            'slug' => Str::of($name)->slug('-'),
             'description' => $this->faker->text(),
+            'coordinate' => $this->faker->latitude() . " " . $this->faker->longitude(),
         ];
     }
 }
