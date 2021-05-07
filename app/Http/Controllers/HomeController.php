@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\Destination;
+use App\Models\Package;
 use Carbon\Carbon;
 use Analytics;
 use Spatie\Analytics\Period;
@@ -29,8 +31,7 @@ class HomeController extends Controller
     {
         $analytics = Analytics::fetchTotalVisitorsAndPageViews(Period::days(6));
         $page = Analytics::fetchMostVisitedPages(Period::days(6), 5);
-        $user = Analytics::fetchUserTypes(Period::days(0))->countBy('type');
-
+        
         $startDate = Carbon::parse('2021-01-01');
         $endDate = Carbon::now();
         $endDateBefore = Carbon::now()->subMonth();
@@ -42,8 +43,10 @@ class HomeController extends Controller
         else{
             $update = ($total - $totalBefore);
         }
-        
+        $user = Analytics::fetchUserTypes(Period::create($startDate, $endDate))->countBy('type');
         $news = News::count();
-        return view('dashboard', compact(['analytics', 'page', 'user', 'total', 'update', 'news']));
+        $destination = Destination::count();
+        $package = Package::count();
+        return view('dashboard', compact(['analytics', 'page', 'user', 'total', 'update', 'news', 'destination', 'package']));
     }
 }

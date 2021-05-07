@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Package</h5>
-                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ $package }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -72,7 +72,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Destination</h5>
-                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ $destination }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">
