@@ -928,15 +928,14 @@ var OrdersChart = (function() {
 	function initChart($chart) {
 
 		// Create chart
-		var ordersChart = new Chart($chart, {
+		var visitorChart = new Chart($chart, {
 			type: 'bar',
 			options: {
 				scales: {
 					yAxes: [{
 						ticks: {
 							callback: function(value) {
-								if (!(value % 10)) {
-									//return '$' + value + 'k'
+								if (!(value % 1)) {
 									return value
 								}
 							}
@@ -962,16 +961,16 @@ var OrdersChart = (function() {
 				}
 			},
 			data: {
-				labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				labels: window.date,
 				datasets: [{
-					label: 'Sales',
-					data: [25, 20, 30, 22, 17, 29]
+					label: 'Visitor',
+					data: window.data2
 				}]
 			}
 		});
 
 		// Save to jQuery object
-		$chart.data('chart', ordersChart);
+		$chart.data('chart', visitorChart);
 	}
 
 
@@ -994,16 +993,22 @@ var OrdersChart = (function() {
 
 var SalesChart = (function() {
 
+	//
 	// Variables
+	//
 
 	var $chart = $('#chart-sales');
 
 
+	//
 	// Methods
+	//
 
-	function init($chart) {
+	// Init chart
+	function initChart($chart) {
 
-		var salesChart = new Chart($chart, {
+		// Create chart
+		var visitChart = new Chart($chart, {
 			type: 'line',
 			options: {
 				scales: {
@@ -1014,8 +1019,8 @@ var SalesChart = (function() {
 						},
 						ticks: {
 							callback: function(value) {
-								if (!(value % 10)) {
-									return '$' + value + 'k';
+								if (!(value % 1)) {
+									return value
 								}
 							}
 						}
@@ -1032,32 +1037,64 @@ var SalesChart = (function() {
 								content += '<span class="popover-body-label mr-auto">' + label + '</span>';
 							}
 
-							content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+							content += '<span class="popover-body-value">' + yLabel + '</span>';
 							return content;
 						}
 					}
 				}
 			},
 			data: {
-				labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				labels: window.date,
 				datasets: [{
-					label: 'Performance',
-					data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+					label: 'Value',
+					data: window.data
 				}]
 			}
 		});
 
 		// Save to jQuery object
-
-		$chart.data('chart', salesChart);
-
-	};
+		$chart.data('chart', visitChart);
+	}
 
 
-	// Events
-
+	// Init chart
 	if ($chart.length) {
-		init($chart);
+		initChart($chart);
+	}
+
+})();
+
+var UsersChart = (function() {
+
+	var $chart = $('#chart-users');
+
+	// Init chart
+	function initChart($chart) {
+
+		// Create chart
+		var usersChart = new Chart($chart, {
+			type: 'doughnut',
+			data: {
+				labels: ['New', 'Returning'],
+				datasets: [{
+					label: 'Value',
+					data: window.user,
+					backgroundColor: [
+						'#717bcc',
+						'#fb6340'
+					],
+				}]
+			}
+		});
+
+		// Save to jQuery object
+		$chart.data('chart', usersChart);
+	}
+
+
+	// Init chart
+	if ($chart.length) {
+		initChart($chart);
 	}
 
 })();
