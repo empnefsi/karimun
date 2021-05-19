@@ -32,16 +32,18 @@ class PackageRequest extends FormRequest
      */
     public function rules()
     {
+        $package_id = isset($this->package) ? $this->package->package_id : null;
+
         return [
             'name' => [
                         'required',
                         'max:255',
-                        Rule::unique('packages')->ignore($this->package->package_id, 'package_id'),
+                        Rule::unique('packages')->ignore($package_id, 'package_id'),
                     ],
             'slug' => [
                         'required',
                         'max:255',
-                        Rule::unique('packages')->ignore($this->package->package_id, 'package_id'),
+                        Rule::unique('packages')->ignore($package_id, 'package_id'),
                     ],
             'description' => 'required',
             'price' => 'required|numeric',
