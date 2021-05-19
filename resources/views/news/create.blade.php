@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('User Profile')])
 
 @section('content')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt-7">
         <div class="row">
             <form action="{{ route('news.store') }}" method="POST">
                 @csrf

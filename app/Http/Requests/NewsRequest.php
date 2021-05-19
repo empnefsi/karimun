@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class NewsRequest extends FormRequest
 {
@@ -31,9 +32,19 @@ class NewsRequest extends FormRequest
      */
     public function rules()
     {
+        $news_id = isset($this->news) ? $this->news->news_id : null;
+
         return [
-            'title' => 'required|unique:news|max:255',
-            'slug' => 'required|unique:news|max:255',
+            'title' => [
+                            'required',
+                            'max:255',
+                            Rule::unique('news')->ignore($news_id, 'news_id'),
+                        ],
+            'slug' => [
+                            'required',
+                            'max:255',
+                            Rule::unique('news')->ignore($news_id, 'news_id'),
+                        ],
             'description' => 'required',
         ];
     }

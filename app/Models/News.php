@@ -16,6 +16,16 @@ class News extends Model
         'slug',
         'description',
     ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     
     public function images()
     {
