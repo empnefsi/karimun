@@ -11,6 +11,12 @@ class News extends Model
 
     protected $primaryKey = 'news_id';
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+    ];
+    
     public function images()
     {
         return $this->hasMany(Image::class, 'foreign_id', 'news_id');
