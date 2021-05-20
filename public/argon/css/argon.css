@@ -6065,7 +6065,7 @@ input[type='button'].btn-block
     padding: .5rem .75rem;
 
     color: #8898aa;
-    border: 1px solid #dee2e6; 
+    /* border: 1px solid #dee2e6;  */
     background-color: #fff;
 }
 .page-link:hover
@@ -6121,6 +6121,7 @@ input[type='button'].btn-block
     color: #8898aa;
     border-color: #dee2e6; 
     background-color: #fff;
+    margin-right: 20px !important;
 }
 
 .pagination-lg .page-link
@@ -20861,13 +20862,13 @@ textarea[resize='horizontal']
 
 .table thead th
 {
-    font-size: .65rem;
+    font-size: .80rem;
 
     padding-top: .75rem;
     padding-bottom: .75rem;
 
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    /* letter-spacing: 1px;
+    text-transform: uppercase; */
 
     border-bottom: 1px solid #e9ecef;
 }
@@ -21866,4 +21867,17 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     bottom: 0; 
 
     height: 3px;
+}
+
+.card.mt-5.p-5{
+    border-radius: 1rem;
+}
+
+.fixed-bottom{
+    bottom: 1% !important;
+    left: 12% !important;
+}
+
+.filepond--drop-label.filepond--drop-label label{
+    margin: -35px 0px 0px 0px !important;
 }

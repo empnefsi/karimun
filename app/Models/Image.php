@@ -10,4 +10,5 @@ class Image extends Model
     use HasFactory;
 
     protected $primaryKey = 'image_id';
+    protected $fillable = ['role', 'path'];
 }

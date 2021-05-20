@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DestinationController extends Controller
 {
@@ -14,7 +17,9 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $destination = DB::table('destinations')
+        ->get();
+        return view ('destination', ['destination' => $destination]);
     }
 
     /**
@@ -35,7 +40,33 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = DB::table('destinations')->where('name', $request->inputName)->first();
+        if($name) {
+            return redirect()->back()->with('status', 'Destination already exist!');
+        }
+
+        $file = $request->file('file');
+        if($file){
+            $name = $file->getClientOriginalName();
+            $path = $file->storeAs('public/destinations/',$name);
+        }
+        else{
+            $name = NULL;
+        }
+
+        $destination = Destination::create([
+            'name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+        ]);
+
+        $image = $destination->images()->create([
+            'role' => 'destinations',
+            'path' => 'public/destinations/'.$name,
+        ]);
+
+        return redirect('destinationmanagement')->with('status', 'Data has been added successfully!');
     }
 
     /**
@@ -46,7 +77,7 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+        return view('destinationForms');
     }
 
     /**
