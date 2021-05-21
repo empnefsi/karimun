@@ -5703,7 +5703,7 @@ input[type='button'].btn-block
     word-wrap: break-word;
 
     border: 1px solid rgba(0, 0, 0, .05);
-    border-radius: .375rem; 
+    border-radius: 1rem; 
     background-color: #fff;
     background-clip: border-box;
 }
@@ -21880,4 +21880,12 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 .filepond--drop-label.filepond--drop-label label{
     margin: -35px 0px 0px 0px !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter input{
+    width: 75% !important;
+}
+
+.modal-content{
+    width: auto;
 }

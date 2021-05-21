@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
 	Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
 	Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
+	Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
 });
 
 

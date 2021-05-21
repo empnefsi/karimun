@@ -3,10 +3,9 @@
 @section('title', 'Destination Management')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/datatables.min.css"/>
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-@endsection
 
+@endsection
+    <script src="assets/vendor/dropzone/dist/min/dropzone.min.css"></script>
 @section('content')
     @include('layouts.headers.main')
     
@@ -17,7 +16,7 @@
             @csrf
             <div class="card mt-4">
                 <div class="card-body">
-                    <div class="row mT-20 mB-0">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputName">Destination Name</label>
@@ -26,16 +25,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mT-20 mB-0">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputCover">Cover Photo</label>
                                 <input type="file" name="file" id="inputCover" class="form-control rounded" required>
-                                <div class="invalid-feedback">*Please provide a valid file type.</div>
+                                <div class="invalid-feedback">*Please choose 1 file.</div>
                             </div>
                         </div>
                     </div>
-                    <div class="row mT-20 mB-0">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputLocation">Destination Location URL</label>
@@ -44,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mT-20 mB-0">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputDescription">Description</label>
@@ -53,12 +52,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mT-20 mB-0">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputGallery">Gallery</label>
-                                <input type="file" name="file2" id="inputGallery" class="form-control rounded" required>
-                                <div class="invalid-feedback">*Please provide a valid file type.</div>
+                                <input type="file" name="file2" id="inputGallery" class="form-control rounded" multiple required>
+                                <div class="invalid-feedback">*Please choose at least 1 file (max. 10).</div>
                             </div>
                         </div>
                     </div>
@@ -105,23 +104,12 @@
 @push('scripts')
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/datatables.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#dataTable').DataTable();
-        } );
-    </script>
+    <script src="assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
     <script>
         ClassicEditor
             .create( document.querySelector( '#inputDescription' ) )
             .catch( error => {
                 console.error( error );
             } );
-    </script>
-    <script>
-        const inputElement1 = document.querySelector('input[id="inputGallery"]');
-        const inputElement2 = document.querySelector('input[id="inputCover"]');
-        const pond1 = FilePond.create( inputElement1 );
-        const pond2 = FilePond.create( inputElement2 );
     </script>
 @endpush

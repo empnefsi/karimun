@@ -3,7 +3,11 @@
 @section('title', 'Destination Management')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/datatables.min.css"/>
+    <link rel="stylesheet" href="assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.css"/>
 @endsection
 
 @section('content')
@@ -17,51 +21,87 @@
                     <a href="/adddestination" type="button" class="btn btn-primary btn-sm animation-on-hover float-right mb-2">+ Add Data</a>
                 </div>
             </div>
-            <table id="dataTable" class="table table-striped table-bordered display">
-                <thead class="text-center align-middle">
-                    <tr>
-                        <th width="10">No</th>
-                        <th width="200">Name</th>
-                        <th>Description</th>
-                        <th width="15">Location</th>
-                        <th width="15">Action</th>
-                    </tr>
-                </thead>
-                <tfoot class="text-center align-middle">
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                @foreach($destination as $destination)
-                    <tr>
-                        <td class="text-center align-middle">{{$loop->iteration}}.</td>
-                        <td class="text-center align-middle">{{$destination->name}}</td>
-                        <td class="text-center align-middle">{!! \Illuminate\Support\Str::limit($destination->description,120)!!}</td>
-                        <td class="text-center align-middle">{{ \Illuminate\Support\Str::limit($destination->coordinate,20)}}</td>
-                        <td class="text-center align-middle">
-                            <a href="" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
-                            <a href="" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
-                            <a href="" class="btn btn-danger btn-sm text-white " onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-striped table-bordered display">
+                    <thead class="text-center align-middle">
+                        <tr>
+                            <th width="10">No</th>
+                            <th width="200">Name</th>
+                            <th>Description</th>
+                            <th width="15">Location</th>
+                            <th width="15">Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="text-center align-middle">
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php $destinations = []; $i=0; $count=count($destination); $j=1; ?>
+                        @foreach($destination as $destination)
+                            <?php 
+                                $destinations[$i][0] = $destination->name;
+                                $destinations[$i][1] = $destination->slug;
+                                $destinations[$i][2] = $destination->description;
+                                $destinations[$i][3] = $destination->coordinate;
+                                $i++;
+                            ?>
+                        @endforeach
+                        @for($i=0;$i<$count;$i++)
+                            <tr>
+                                <td class="text-center align-middle">{{$j}}.</td>
+                                <td class="text-center align-middle">{{$destinations[$i][0]}}</td>
+                                <td class="text-center align-middle">{{ strip_tags(\Illuminate\Support\Str::limit($destinations[$i][2],120))}}</td>
+                                <!-- <td><?php echo $destinations[$i][3];?></td> -->
+                                <td class="text-center align-middle"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalLocation<?php $i?>"><i class="fas fa-map-marker-alt"></i></button>
+                                    <div id="modalLocation<?php $i?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <?php echo $destinations[$i][3];?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a href="" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
+                                    <a href="" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="deletedestination/{{$destinations[$i][1]}}" class="btn btn-danger btn-sm text-white " onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php $j++; ?>
+                        @endfor
+                    </tbody>
+                </table>
+
+                
+            </div>
         </div>
         @include('layouts.footers.auth')
     </div>
 @endsection
 
 @push('scripts')
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/datatables.min.js"></script>
+    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.js"></script>
     <script>
         $(document).ready( function () {
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable( {
+                responsive: true
+            } );
         } );
     </script>
 @endpush

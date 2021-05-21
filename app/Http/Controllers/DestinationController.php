@@ -19,6 +19,7 @@ class DestinationController extends Controller
     {
         $destination = DB::table('destinations')
         ->get();
+        // dd($destination);
         return view ('destination', ['destination' => $destination]);
     }
 
@@ -41,6 +42,9 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $name = DB::table('destinations')->where('name', $request->inputName)->first();
+
+        // dd($request);
+
         if($name) {
             return redirect()->back()->with('status', 'Destination already exist!');
         }
@@ -54,6 +58,15 @@ class DestinationController extends Controller
             $name = NULL;
         }
 
+        $file2 = $request->file('file2');
+        if($file){
+            $name2 = $file->getClientOriginalName();
+            $path2 = $file->storeAs('public/destinations/',$name2);
+        }
+        else{
+            $name2 = NULL;
+        }
+
         $destination = Destination::create([
             'name' => $request->inputName,
             'slug' => Str::slug($request->inputName, '-'),
@@ -63,9 +76,10 @@ class DestinationController extends Controller
 
         $image = $destination->images()->create([
             'role' => 'destinations',
-            'path' => 'public/destinations/'.$name,
+            'path' => $name,
+            // 'path' => 'public/destinations/'.$name2,
         ]);
-
+        
         return redirect('destinationmanagement')->with('status', 'Data has been added successfully!');
     }
 
@@ -109,8 +123,22 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Destination $destination)
+    public function destroy($slug)
     {
-        //
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', $slug)
+        ->pluck('destination_id');
+
+        // dd($id);
+        $destination = DB::table('destinations')
+        ->where('slug', '=', $slug);
+        $destination->delete();
+
+        $image = DB::table('images')
+        ->where('foreign_id', '=', $id);
+        $image->delete();
+
+        return redirect('destinationmanagement')->with('status','Data has been removed successfully!');
     }
 }
