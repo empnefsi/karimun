@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Destination')
+@section('title', 'Edit Destination')
 
 @section('css')
 
@@ -11,16 +11,17 @@
     
     <div class="container-fluid">
         <a class="back" href="/destinationmanagement"><i class="fas fa-chevron-left mt-4"></i> Back</a>
-        <h1 class="c-grey-900 mt-4 text-center">Add Destination</h1>
-        <form class="form-create" id="needs-validation" role="form" method="POST" action="destinationForms" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
-            @csrf
+        <h1 class="c-grey-900 mt-4 text-center">Edit Destination</h1>
+        <form class="form-create" id="needs-validation" role="form" method="POST" action="{{ route('destinationFormsEdit') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
+        @csrf
+            @foreach($destination as $destination)
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputName">Destination Name</label>
-                                <input type="text" name="inputName" id="inputName" class="form-control rounded" placeholder="Destination Name" required>
+                                <input type="text" value="{{$destination->name}}" name="inputName" id="inputName" class="form-control rounded" placeholder="Destination Name" required>
                                 <div class="invalid-feedback">*Please provide a valid destination name.</div>
                             </div>
                         </div>
@@ -38,7 +39,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputLocation">Destination Location URL</label>
-                                <input type="text" name="inputLocation" id="inputLocation" class="form-control rounded" placeholder="Destination Location URL" required>
+                                <input type="text" value="{{$destination->coordinate}}" name="inputLocation" id="inputLocation" class="form-control rounded" placeholder="Destination Location URL" required>
                                 <div class="invalid-feedback">*Please provide a valid destination location URL.</div>
                             </div>
                         </div>
@@ -47,7 +48,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputDescription">Description</label>
-                                <textarea name="inputDescription" id="inputDescription" class="form-control rounded" rows="10" placeholder="Description" required></textarea>
+                                <textarea name="inputDescription" id="inputDescription" class="form-control rounded" rows="10" placeholder="Description" required><?php echo $destination->description?></textarea>
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
                         </div>
@@ -66,6 +67,7 @@
                     <button class="btn btn-primary float-right" type="submit" id="submit">Submit</button>
                 </div>
             </div>
+            @endforeach
         </form>
         <script>
             ! function() {
@@ -83,7 +85,7 @@
     @if (session('status'))
         <script>
             window.onload = () => {
-            showNotification('top', 'right', 'warning', '<?php echo session('status') ?>');
+                showNotification('top', 'right', 'warning', '<?php echo session('status') ?>');
             };
         </script>
     @endif

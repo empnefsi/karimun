@@ -58,15 +58,6 @@ class DestinationController extends Controller
             $name = NULL;
         }
 
-        $file2 = $request->file('file2');
-        if($file){
-            $name2 = $file->getClientOriginalName();
-            $path2 = $file->storeAs('public/destinations/',$name2);
-        }
-        else{
-            $name2 = NULL;
-        }
-
         $destination = Destination::create([
             'name' => $request->inputName,
             'slug' => Str::slug($request->inputName, '-'),
@@ -77,8 +68,20 @@ class DestinationController extends Controller
         $image = $destination->images()->create([
             'role' => 'destinations',
             'path' => $name,
-            // 'path' => 'public/destinations/'.$name2,
         ]);
+
+        if($request->hasFile('file2')){
+            $file2 = $request->file('file2');
+            foreach($file2 as $file2){
+                $name2 = $file2->getClientOriginalName();
+                $path2 = $file2->storeAs('public/destinations/',$name2);
+                
+                $image = $destination->images()->create([
+                    'role' => 'destinations',
+                    'path' => $name2,
+                ]);
+            }
+        }
         
         return redirect('destinationmanagement')->with('status', 'Data has been added successfully!');
     }
@@ -92,6 +95,24 @@ class DestinationController extends Controller
     public function show(Destination $destination)
     {
         return view('destinationForms');
+    }
+
+    public function showEdit($slug)
+    {
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', $slug)
+        ->pluck('destination_id');
+        
+        $destination = DB::table('destinations')
+        ->join('images', 'foreign_id', '=', 'destination_id')
+        ->where([
+                ['destinations.slug', '=', $slug],
+                ['images.foreign_id', '=', $id],
+            ])
+        ->get();
+
+        return view('destinationFormsEdit', ['destination' => $destination]);
     }
 
     /**
@@ -114,7 +135,62 @@ class DestinationController extends Controller
      */
     public function update(Request $request, Destination $destination)
     {
-        //
+        // $name = DB::table('destinations')->where('name', $request->inputName)->first();
+
+        // if($name) {
+        //     return redirect()->back()->withInput()->with('status', 'Destination already exist!');
+        // }
+
+        $file = $request->file('file');
+        if($file){
+            $name = $file->getClientOriginalName();
+            $path = $file->storeAs('public/destinations/',$name);
+        }
+        else{
+            $name = NULL;
+        }
+
+        $destination = DB::table('destinations')
+        ->where('slug', '=', Str::slug($request->inputName, '-'))
+        // ->get();
+        ->update(
+            ['name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+            ]
+        );
+
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', Str::slug($request->inputName, '-'))
+        ->pluck('destination_id');
+
+        $image = DB::table('images')
+        ->where('foreign_id', '=', $id)
+        ->update(
+            ['role' => 'destinations',
+            'path' => $name,
+            ]
+        );
+
+        if($request->hasFile('file2')){
+            $file2 = $request->file('file2');
+            foreach($file2 as $file2){
+                $name2 = $file2->getClientOriginalName();
+                $path2 = $file2->storeAs('public/destinations/',$name2);
+                
+                $image2 = DB::table('images')
+                ->where('foreign_id', '=', $id)
+                ->update(
+                    ['role' => 'destinations',
+                    'path' => $name2,
+                    ]
+                );
+            }
+        }
+        
+        return redirect('destinationmanagement')->with('status', 'Data has been updated successfully!');
     }
 
     /**

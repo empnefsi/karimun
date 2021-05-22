@@ -14,8 +14,7 @@
     @include('layouts.headers.main')
     
     <div class="container-fluid">
-        <h1 class="c-grey-900 mt-5 text-center">DESTINATION LIST</h1>
-        <div class="card mt-5 pl-5 pr-5 pt-4 pb-4">
+        <div class="card mt-7 pl-5 pr-5 pt-4 pb-4">
             <div class="row">
                 <div class="col-md-12">
                     <a href="/adddestination" type="button" class="btn btn-primary btn-sm animation-on-hover float-right mb-2">+ Add Data</a>
@@ -71,7 +70,7 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
-                                    <a href="" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="editdestination/{{$destinations[$i][1]}}" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
                                     <a href="deletedestination/{{$destinations[$i][1]}}" class="btn btn-danger btn-sm text-white " onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -85,6 +84,14 @@
         </div>
         @include('layouts.footers.auth')
     </div>
+    
+    @if (session('status'))
+        <script>
+            window.onload = () => {
+            showNotification('top', 'right', 'success', '<?php echo session('status') ?>');
+            };
+        </script>
+    @endif
 @endsection
 
 @push('scripts')
@@ -97,6 +104,8 @@
     <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.js"></script>
+    <script src="assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="assets/vendor/bootstrap-notify/notification.js"></script>
     <script>
         $(document).ready( function () {
             $('#dataTable').DataTable( {

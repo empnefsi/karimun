@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
 	Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
 	Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
+	Route::get('editdestination/{slug}', [App\Http\Controllers\DestinationController::class, 'showEdit']);
+	Route::post('/destinationFormsEdit', [App\Http\Controllers\DestinationController::class, 'update'])->name('destinationFormsEdit');
 });
 
 
