@@ -110,7 +110,7 @@ class DestinationController extends Controller
                 ['destinations.slug', '=', $slug],
                 ['images.foreign_id', '=', $id],
             ])
-        ->get();
+        ->first();
 
         return view('destinationFormsEdit', ['destination' => $destination]);
     }

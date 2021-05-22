@@ -14,7 +14,6 @@
         <h1 class="c-grey-900 mt-4 text-center">Edit Destination</h1>
         <form class="form-create" id="needs-validation" role="form" method="POST" action="{{ route('destinationFormsEdit') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
         @csrf
-            @foreach($destination as $destination)
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="row">
@@ -67,7 +66,6 @@
                     <button class="btn btn-primary float-right" type="submit" id="submit">Submit</button>
                 </div>
             </div>
-            @endforeach
         </form>
         <script>
             ! function() {

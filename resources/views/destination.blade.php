@@ -20,67 +20,63 @@
                     <a href="/adddestination" type="button" class="btn btn-primary btn-sm animation-on-hover float-right mb-2">+ Add Data</a>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table id="dataTable" class="table table-striped table-bordered display">
-                    <thead class="text-center align-middle">
+            <table id="dataTable" class="table table-striped table-bordered display" style="width: 100%">
+                <thead class="text-center align-middle">
+                    <tr>
+                        <th style="width: 5%">No</th>
+                        <th style="width: 25%">Name</th>
+                        <th style="width: 40%">Description</th>
+                        <th style="width: 10%">Location</th>
+                        <th style="width: 20%">Action</th>
+                    </tr>
+                </thead>
+                <tfoot class="text-center align-middle">
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <?php $destinations = []; $i=0; $count=count($destination); $j=1; ?>
+                    @foreach($destination as $destination)
+                        <?php 
+                            $destinations[$i][0] = $destination->name;
+                            $destinations[$i][1] = $destination->slug;
+                            $destinations[$i][2] = $destination->description;
+                            $destinations[$i][3] = $destination->coordinate;
+                            $i++;
+                        ?>
+                    @endforeach
+                    @for($i=0;$i<$count;$i++)
                         <tr>
-                            <th width="10">No</th>
-                            <th width="200">Name</th>
-                            <th>Description</th>
-                            <th width="15">Location</th>
-                            <th width="15">Action</th>
-                        </tr>
-                    </thead>
-                    <tfoot class="text-center align-middle">
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Location</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <?php $destinations = []; $i=0; $count=count($destination); $j=1; ?>
-                        @foreach($destination as $destination)
-                            <?php 
-                                $destinations[$i][0] = $destination->name;
-                                $destinations[$i][1] = $destination->slug;
-                                $destinations[$i][2] = $destination->description;
-                                $destinations[$i][3] = $destination->coordinate;
-                                $i++;
-                            ?>
-                        @endforeach
-                        @for($i=0;$i<$count;$i++)
-                            <tr>
-                                <td class="text-center align-middle">{{$j}}.</td>
-                                <td class="text-center align-middle">{{$destinations[$i][0]}}</td>
-                                <td class="text-center align-middle">{{ strip_tags(\Illuminate\Support\Str::limit($destinations[$i][2],120))}}</td>
-                                <!-- <td><?php echo $destinations[$i][3];?></td> -->
-                                <td class="text-center align-middle"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalLocation<?php $i?>"><i class="fas fa-map-marker-alt"></i></button>
-                                    <div id="modalLocation<?php $i?>" class="modal fade" role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <?php echo $destinations[$i][3];?>
-                                                </div>
+                            <td class="text-center align-middle">{{$j}}.</td>
+                            <td class="text-center align-middle">{{$destinations[$i][0]}}</td>
+                            <td class="text-center align-middle">{{ strip_tags(\Illuminate\Support\Str::limit($destinations[$i][2],75))}}</td>
+                            <!-- <td><?php echo $destinations[$i][3];?></td> -->
+                            <td class="text-center align-middle"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal{{$i}}"><i class="fas fa-map-marker-alt"></i></button>
+                                <div id="modal{{$i}}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <?php echo $destinations[$i][3];?>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a href="" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
-                                    <a href="editdestination/{{$destinations[$i][1]}}" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="deletedestination/{{$destinations[$i][1]}}" class="btn btn-danger btn-sm text-white " onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <?php $j++; ?>
-                        @endfor
-                    </tbody>
-                </table>
-
-                
-            </div>
+                                </div>
+                            </td>
+                            <td class="text-center align-middle">
+                                <a href="" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
+                                <a href="editdestination/{{$destinations[$i][1]}}" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
+                                <a href="deletedestination/{{$destinations[$i][1]}}" class="btn btn-danger btn-sm text-white " onclick="return confirm('Are you sure to delete this record?')"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <?php $j++; ?>
+                    @endfor
+                </tbody>
+            </table>
         </div>
         @include('layouts.footers.auth')
     </div>
