@@ -88,6 +88,11 @@
                         <i class="ni ni-bullet-list-67 text-default"></i> {{ __('Destination Management') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('news.index') }}">
+                        <i class="ni ni-archive-2 text-default"></i> {{ __('News Management') }}
+                    </a>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
