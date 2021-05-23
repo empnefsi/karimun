@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
 {
@@ -14,7 +18,10 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $destination = DB::table('destinations')
+        ->get();
+        // dd($destination);
+        return view ('destination', ['destination' => $destination]);
     }
 
     /**
@@ -35,7 +42,49 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = DB::table('destinations')->where('name', $request->inputName)->first();
+
+        if($name) {
+            return redirect()->back()->with('status', 'Destination already exist!');
+        }
+
+        $destination = Destination::create([
+            'name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+        ]);
+
+        $file = $request->file('file');
+        if($file){
+            $name = $file->getClientOriginalName();
+            $path = $file->storeAs('public/destinations/',$name);
+        }
+        else{
+            $name = NULL;
+        }
+
+        if($file){
+            $image = $destination->images()->create([
+                'role' => 'destinations',
+                'path' => $name,
+            ]);
+        }
+
+        $file2 = $request->file('file2');
+        if($file2){
+            foreach($file2 as $file2){
+                $name2 = $file2->getClientOriginalName();
+                $path2 = $file2->storeAs('public/destinations/',$name2);
+                
+                $image = $destination->images()->create([
+                    'role' => 'destinations',
+                    'path' => $name2,
+                ]);
+            }
+        }
+        
+        return redirect('destinationmanagement')->with('status', 'Data has been added successfully!');
     }
 
     /**
@@ -46,7 +95,41 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+        return view('destinationForms');
+    }
+
+    public function showEdit($slug)
+    {
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', $slug)
+        ->pluck('destination_id');
+        
+        $destination = DB::table('destinations')
+        ->join('images', 'foreign_id', '=', 'destination_id')
+        ->where([
+                ['destinations.slug', '=', $slug],
+                ['images.foreign_id', '=', $id],
+            ])
+        ->first();
+
+        $image = DB::table('images')
+        ->where('foreign_id', '=', $id)
+        ->first();
+
+        $imageall = DB::table('images')
+        ->where('foreign_id', '=', $id)
+        ->get();
+        
+        $eximg = DB::table('images')
+        ->where([
+            ['image_id', '<>', $image->image_id],
+            ['foreign_id', '=', $id],
+        ])
+        ->get();
+        
+
+        return view('destinationFormsEdit', ['destination' => $destination, 'image' => $image, 'eximg' => $eximg]);
     }
 
     /**
@@ -69,7 +152,82 @@ class DestinationController extends Controller
      */
     public function update(Request $request, Destination $destination)
     {
-        //
+        $name = DB::table('destinations')
+        ->where([
+            ['destination_id', '<>', $request->inputId],
+            ['name', '=', $request->inputName],
+        ])
+        ->first();
+
+        if($name) {
+            return redirect()->back()->with('status', 'Destination already exist!');
+        }
+        
+        $destination = DB::table('destinations')
+        ->where('destination_id', '=', $request->inputId)
+        ->update(
+            ['name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+            ]
+        );
+
+        $file = $request->file('file');
+        if($file){
+            $name = $file->getClientOriginalName();
+            $path = $file->storeAs('public/destinations/',$name);
+        }
+        else{
+            $name = NULL;
+        }
+
+        // dd($id);
+        if($file){
+            $old = Image::where([
+                ['role', 'destinations'],
+                ['foreign_id', $request->inputId]
+            ])
+            ->pluck('path');
+
+            foreach($old as $old){
+                Storage::delete('public/destinations/'.$old);
+            }
+
+            $image = DB::table('images')
+            ->where('foreign_id', $request->inputId)
+            ->where('role', 'destinations')
+            ->delete();
+
+            $imageadd = new Image;
+            $imageadd->foreign_id = $request->inputId;
+            $imageadd->role = 'destinations';
+            $imageadd->path = $name;
+            $imageadd->save();       
+        }
+
+        $file2 = $request->file('file2');
+        if($file2){
+            foreach($file2 as $file2){
+                if($file2){
+                    $name2 = $file2->getClientOriginalName();
+                    $path2 = $file2->storeAs('public/destinations/',$name2);
+                }
+                else{
+                    $name2 = NULL;
+                }
+                
+                if($file2){
+                    $imageadd2 = new Image;
+                    $imageadd2->foreign_id = $request->inputId;
+                    $imageadd2->role = 'destinations';
+                    $imageadd2->path = $name2;
+                    $imageadd2->save();
+                }
+            }
+        }
+        
+        return redirect('destinationmanagement')->with('status', 'Data has been updated successfully!');
     }
 
     /**
@@ -78,8 +236,22 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Destination $destination)
+    public function destroy($slug)
     {
-        //
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', $slug)
+        ->pluck('destination_id');
+
+        // dd($id);
+        $destination = DB::table('destinations')
+        ->where('slug', '=', $slug);
+        $destination->delete();
+
+        $image = DB::table('images')
+        ->where('foreign_id', '=', $id);
+        $image->delete();
+
+        return redirect('destinationmanagement')->with('status','Data has been removed successfully!');
     }
 }
