@@ -37,7 +37,18 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        News::create($request->validated());
+        $news = News::create($request->validated());
+
+        $cover = $request->validated()['cover'];
+        if($cover){
+            $name = $cover->getClientOriginalName();
+            $path = $cover->storeAs('public/news/',$name);
+
+            $image = $news->images()->create([
+                'role' => 'news',
+                'path' => $name,
+            ]);
+        }
 
         return redirect('news')->with('status','News was successfully created');
     }

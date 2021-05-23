@@ -46,6 +46,7 @@ class NewsRequest extends FormRequest
                             Rule::unique('news')->ignore($news_id, 'news_id'),
                         ],
             'description' => 'required',
+            'cover' => ['required', 'image'],
         ];
     }
     

@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
+	Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
+	
+	Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
+
 	Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
 	Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
 	Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
