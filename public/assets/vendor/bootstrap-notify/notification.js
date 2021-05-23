@@ -16,7 +16,7 @@ function showNotification(from, align, type, message){
     },{
         offset: {
             x: 20,
-            y:100
+            y: 20
         },
         type: type,
         delay: 5000,

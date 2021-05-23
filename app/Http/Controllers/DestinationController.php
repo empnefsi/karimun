@@ -7,6 +7,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
 {
@@ -171,11 +172,6 @@ class DestinationController extends Controller
             'coordinate' => $request->inputLocation,
             ]
         );
-        
-        $id = DB::table('destinations')
-        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
-        ->where('destinations.slug', '=', Str::slug($request->inputName, '-'))
-        ->pluck('destination_id');
 
         $file = $request->file('file');
         if($file){
@@ -188,12 +184,23 @@ class DestinationController extends Controller
 
         // dd($id);
         if($file){
+            $old = Image::where([
+                ['role', 'destinations'],
+                ['foreign_id', $request->inputId]
+            ])
+            ->pluck('path');
+
+            foreach($old as $old){
+                Storage::delete('public/destinations/'.$old);
+            }
+
             $image = DB::table('images')
-            ->where('foreign_id', '=', $id)
+            ->where('foreign_id', $request->inputId)
+            ->where('role', 'destinations')
             ->delete();
 
             $imageadd = new Image;
-            $imageadd->foreign_id = $id[0];
+            $imageadd->foreign_id = $request->inputId;
             $imageadd->role = 'destinations';
             $imageadd->path = $name;
             $imageadd->save();       
@@ -212,7 +219,7 @@ class DestinationController extends Controller
                 
                 if($file2){
                     $imageadd2 = new Image;
-                    $imageadd2->foreign_id = $id[0];
+                    $imageadd2->foreign_id = $request->inputId;
                     $imageadd2->role = 'destinations';
                     $imageadd2->path = $name2;
                     $imageadd2->save();

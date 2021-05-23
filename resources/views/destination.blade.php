@@ -14,7 +14,7 @@
     @include('layouts.headers.main')
     
     <div class="container-fluid">
-        <div class="card mt-7 pl-5 pr-5 pt-4 pb-4">
+        <div class="card mt-5 pl-5 pr-5 pt-4 pb-4">
             <div class="row">
                 <div class="col-md-12">
                     <a href="/adddestination" type="button" class="btn btn-primary btn-sm animation-on-hover float-right mb-2">+ Add Data</a>
@@ -84,7 +84,7 @@
     @if (session('status'))
         <script>
             window.onload = () => {
-            showNotification('top', 'right', 'success', '<?php echo session('status') ?>');
+            showNotification('bottom', 'right', 'success', '<?php echo session('status') ?>');
             };
         </script>
     @endif
