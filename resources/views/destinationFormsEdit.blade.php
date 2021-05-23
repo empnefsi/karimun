@@ -27,10 +27,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group files">
                                 <label for="inputCover">Cover Photo</label>
-                                <input type="file" name="file" id="inputCover" class="form-control rounded" required>
-                                <div class="invalid-feedback">*Please choose 1 file.</div>
+                                <input type="file" name="file" id="inputCover" class="form-control rounded" accept="image/*">
+                            </div>
+                            <div class="mb-4">
+                                <p>Current Cover Photo</p>
+                                <img src="{{asset('/storage/destinations/'.$image->path)}}" alt="images" class="img-fluid" width="320px" height="100%">
                             </div>
                         </div>
                     </div>
@@ -54,13 +57,19 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group files">
                                 <label for="inputGallery">Gallery</label>
-                                <input type="file" name="file2[]" id="inputGallery" class="form-control rounded" multiple required>
-                                <div class="invalid-feedback">*Please choose at least 1 file (max. 10).</div>
+                                <input type="file" name="file2[]" id="inputGallery" class="form-control rounded" accept="image/*" multiple>
+                            </div>
+                            <div class="mb-4">
+                                <p>Current Gallery</p>
+                                @foreach($eximg as $eximg)
+                                    <img src="{{asset('/storage/destinations/'.$eximg->path)}}" alt="images" class="img-fluid" width="320px" height="100%">
+                                @endforeach
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary float-right" type="submit" id="submit">Submit</button>

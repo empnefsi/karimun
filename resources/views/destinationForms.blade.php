@@ -29,7 +29,7 @@
                         <div class="col-md-12">
                             <div class="form-group files">
                                 <label for="inputCover">Cover Photo</label>
-                                <input type="file" name="file" id="inputCover" class="form-control rounded" required>
+                                <input type="file" name="file" id="inputCover" class="form-control rounded" accept="image/*" required>
                                 <div class="invalid-feedback">*Please choose 1 file.</div>
                             </div>
                         </div>
@@ -56,8 +56,8 @@
                         <div class="col-md-12">
                             <div class="form-group files">
                                 <label for="inputGallery">Gallery</label>
-                                <input type="file" name="file2[]" id="inputGallery" class="form-control rounded" multiple required>
-                                <div class="invalid-feedback">*Please choose at least 1 file (max. 10).</div>
+                                <input type="file" name="file2[]" id="inputGallery" class="form-control rounded" accept="image/*" multiple required>
+                                <div class="invalid-feedback">*Please choose at least 1 file.</div>
                             </div>
                         </div>
                     </div>

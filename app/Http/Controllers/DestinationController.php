@@ -43,11 +43,16 @@ class DestinationController extends Controller
     {
         $name = DB::table('destinations')->where('name', $request->inputName)->first();
 
-        // dd($request);
-
         if($name) {
             return redirect()->back()->with('status', 'Destination already exist!');
         }
+
+        $destination = Destination::create([
+            'name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+        ]);
 
         $file = $request->file('file');
         if($file){
@@ -58,20 +63,15 @@ class DestinationController extends Controller
             $name = NULL;
         }
 
-        $destination = Destination::create([
-            'name' => $request->inputName,
-            'slug' => Str::slug($request->inputName, '-'),
-            'description' => $request->inputDescription,
-            'coordinate' => $request->inputLocation,
-        ]);
+        if($file){
+            $image = $destination->images()->create([
+                'role' => 'destinations',
+                'path' => $name,
+            ]);
+        }
 
-        $image = $destination->images()->create([
-            'role' => 'destinations',
-            'path' => $name,
-        ]);
-
-        if($request->hasFile('file2')){
-            $file2 = $request->file('file2');
+        $file2 = $request->file('file2');
+        if($file2){
             foreach($file2 as $file2){
                 $name2 = $file2->getClientOriginalName();
                 $path2 = $file2->storeAs('public/destinations/',$name2);
@@ -112,7 +112,23 @@ class DestinationController extends Controller
             ])
         ->first();
 
-        return view('destinationFormsEdit', ['destination' => $destination]);
+        $image = DB::table('images')
+        ->where('foreign_id', '=', $id)
+        ->first();
+
+        $imageall = DB::table('images')
+        ->where('foreign_id', '=', $id)
+        ->get();
+        
+        $eximg = DB::table('images')
+        ->where([
+            ['image_id', '<>', $image->image_id],
+            ['foreign_id', '=', $id],
+        ])
+        ->get();
+        
+
+        return view('destinationFormsEdit', ['destination' => $destination, 'image' => $image, 'eximg' => $eximg]);
     }
 
     /**
@@ -140,6 +156,24 @@ class DestinationController extends Controller
         // if($name) {
         //     return redirect()->back()->withInput()->with('status', 'Destination already exist!');
         // }
+        
+        
+        // $destination = DB::table('destinations')
+        // ->where('slug', '=', Str::slug($request->inputName, '-'))
+        // ->update(
+        //     ['name' => $request->inputName,
+        //     'slug' => Str::slug($request->inputName, '-'),
+        //     'description' => $request->inputDescription,
+        //     'coordinate' => $request->inputLocation,
+        //     ]
+        // );
+        
+        dd($destination->slug);
+        
+        $id = DB::table('destinations')
+        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
+        ->where('destinations.slug', '=', Str::slug($request->inputName, '-'))
+        ->pluck('destination_id');
 
         $file = $request->file('file');
         if($file){
@@ -150,43 +184,37 @@ class DestinationController extends Controller
             $name = NULL;
         }
 
-        $destination = DB::table('destinations')
-        ->where('slug', '=', Str::slug($request->inputName, '-'))
-        // ->get();
-        ->update(
-            ['name' => $request->inputName,
-            'slug' => Str::slug($request->inputName, '-'),
-            'description' => $request->inputDescription,
-            'coordinate' => $request->inputLocation,
-            ]
-        );
+        // dd($id);
+        if($file){
+            $image = DB::table('images')
+            ->where('foreign_id', '=', $id)
+            ->delete();
 
-        $id = DB::table('destinations')
-        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
-        ->where('destinations.slug', '=', Str::slug($request->inputName, '-'))
-        ->pluck('destination_id');
+            $imageadd = new Image;
+            $imageadd->foreign_id = $id[0];
+            $imageadd->role = 'destinations';
+            $imageadd->path = $name;
+            $imageadd->save();       
+        }
 
-        $image = DB::table('images')
-        ->where('foreign_id', '=', $id)
-        ->update(
-            ['role' => 'destinations',
-            'path' => $name,
-            ]
-        );
-
-        if($request->hasFile('file2')){
-            $file2 = $request->file('file2');
+        $file2 = $request->file('file2');
+        if($file2){
             foreach($file2 as $file2){
-                $name2 = $file2->getClientOriginalName();
-                $path2 = $file2->storeAs('public/destinations/',$name2);
+                if($file2){
+                    $name2 = $file2->getClientOriginalName();
+                    $path2 = $file2->storeAs('public/destinations/',$name2);
+                }
+                else{
+                    $name2 = NULL;
+                }
                 
-                $image2 = DB::table('images')
-                ->where('foreign_id', '=', $id)
-                ->update(
-                    ['role' => 'destinations',
-                    'path' => $name2,
-                    ]
-                );
+                if($file2){
+                    $imageadd2 = new Image;
+                    $imageadd2->foreign_id = $id[0];
+                    $imageadd2->role = 'destinations';
+                    $imageadd2->path = $name2;
+                    $imageadd2->save();
+                }
             }
         }
         
