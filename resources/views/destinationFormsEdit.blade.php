@@ -93,7 +93,7 @@
     @if (session('status'))
         <script>
             window.onload = () => {
-                showNotification('top', 'right', 'warning', '<?php echo session('status') ?>');
+            showNotification('top', 'right', 'warning', '<?php echo session('status') ?>');
             };
         </script>
     @endif
@@ -101,8 +101,8 @@
 
 @push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
-    <script src="assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script src="assets/vendor/bootstrap-notify/notification.js"></script>
+    <script src="{{asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap-notify/notification.js')}}"></script>
     <script>
         ClassicEditor
             .create( document.querySelector( '#inputDescription' ) )
