@@ -151,24 +151,26 @@ class DestinationController extends Controller
      */
     public function update(Request $request, Destination $destination)
     {
-        // $name = DB::table('destinations')->where('name', $request->inputName)->first();
+        $name = DB::table('destinations')
+        ->where([
+            ['destination_id', '<>', $request->inputId],
+            ['name', '=', $request->inputName],
+        ])
+        ->first();
 
-        // if($name) {
-        //     return redirect()->back()->withInput()->with('status', 'Destination already exist!');
-        // }
+        if($name) {
+            return redirect()->back()->with('status', 'Destination already exist!');
+        }
         
-        
-        // $destination = DB::table('destinations')
-        // ->where('slug', '=', Str::slug($request->inputName, '-'))
-        // ->update(
-        //     ['name' => $request->inputName,
-        //     'slug' => Str::slug($request->inputName, '-'),
-        //     'description' => $request->inputDescription,
-        //     'coordinate' => $request->inputLocation,
-        //     ]
-        // );
-        
-        dd($destination->slug);
+        $destination = DB::table('destinations')
+        ->where('destination_id', '=', $request->inputId)
+        ->update(
+            ['name' => $request->inputName,
+            'slug' => Str::slug($request->inputName, '-'),
+            'description' => $request->inputDescription,
+            'coordinate' => $request->inputLocation,
+            ]
+        );
         
         $id = DB::table('destinations')
         ->leftjoin('images', 'foreign_id', '=', 'destination_id')

@@ -21,6 +21,7 @@
                             <div class="form-group">
                                 <label for="inputName">Destination Name</label>
                                 <input type="text" value="{{$destination->name}}" name="inputName" id="inputName" class="form-control rounded" placeholder="Destination Name" required>
+                                <input type="hidden" value="{{$destination->destination_id}}" name="inputId" id="inputName" class="form-control rounded" >
                                 <div class="invalid-feedback">*Please provide a valid destination name.</div>
                             </div>
                         </div>
