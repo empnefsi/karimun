@@ -7,11 +7,11 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="destination.php" class="nav-link">Destinations</a></li>
-                <li class="nav-item"><a href="package.php" class="nav-link">Packages</a></li>
-                <li class="nav-item"><a href="news.php" class="nav-link">News</a></li>
-                <li class="nav-item" title="contact"><a href='contact.html' class="nav-link">Contact</a></li>
+                <li class="nav-item" title="home"><a href="{{ route('welcome') }}" class="nav-link">Home</a></li>
+                <li class="nav-item" title="destinations"><a href="{{ route('destinations') }}" class="nav-link">Destinations</a></li>
+                <li class="nav-item" title="packages"><a href="#" class="nav-link">Packages</a></li>
+                <li class="nav-item" title="news"><a href="#" class="nav-link">News</a></li>
+                <li class="nav-item" title="contact"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </div>

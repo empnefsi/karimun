@@ -13,8 +13,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.index');
+// Guest
+Route::group(['guest'], function() {
+	
+	Route::get('/', function () {
+		return view('guest.index');
+	})->name('welcome');
+
+	Route::get('/destinations', function () {
+		return view('guest.layouts.destination');
+	})->name('destinations');
+
+	Route::get('/packages', function () {
+		return view('guest.layouts.package');
+	})->name('packages');
+
+	Route::get('/news', function () {
+		return view('guest.layouts.news');
+	})->name('news');
+
+	Route::get('/contact', function () {
+		return view('guest.layouts.contact');
+	})->name('contact');
+	
+	Route::get('/destinations/detail', function () {
+		return view('guest.layouts.destination-detail');
+	})->name('destination-detail');
+
+	Route::get('/packages/detail', function () {
+		return view('guest.layouts.package-detail');
+	})->name('destination-detail');
+
+	Route::get('/news/detail', function () {
+		return view('guest.layouts.news-detail');
+	})->name('destination-detail');
+
 });
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
