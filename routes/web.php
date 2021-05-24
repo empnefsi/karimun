@@ -50,14 +50,10 @@ Route::group(['guest'], function() {
 
 });
 
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('admin', function(){ return view('welcome'); });
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
@@ -79,24 +75,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
 	Route::get('editdestination/{slug}', [App\Http\Controllers\DestinationController::class, 'showEdit']);
 	Route::post('/destinationFormsEdit', [App\Http\Controllers\DestinationController::class, 'update'])->name('destinationFormsEdit');
-});
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
-	 Route::get('map', function () {return view('pages.maps');})->name('map');
-	 Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
-	 Route::get('table-list', function () {return view('pages.tables');})->name('table');
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
