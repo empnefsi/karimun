@@ -14,6 +14,7 @@
         <h1 class="c-grey-900 mt-4 text-center">Edit News</h1>
         <form class="form-create" id="needs-validation" role="form" method="POST" action="{{ Route('news.update', ['news' => $news->slug]) }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
             @csrf
+            @method('put')
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="row">
@@ -29,7 +30,7 @@
                         <div class="col-md-12">
                             <div class="form-group files">
                                 <label for="cover">Cover Photo</label>
-                                <input type="file" name="cover" id="cover" class="form-control rounded" accept="image/*" required>
+                                <input type="file" name="cover" id="cover" class="form-control rounded" accept="image/*" >
                                 <div class="invalid-feedback">*Please choose 1 file.</div>
                             </div>
                             <div class="mb-4">
