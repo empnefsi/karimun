@@ -13,6 +13,7 @@
         <a class="back" href="{{ Route('news.index') }}"><i class="fas fa-chevron-left mt-4"></i> Back</a>
         <h1 class="c-grey-900 mt-4 text-center">Add News</h1>
         <form class="form-create" id="needs-validation" role="form" method="POST" action="{{ Route('news.store') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
+            @csrf
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="row">
@@ -37,10 +38,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <div data-toggle="quill" data-quill-placeholder="Description">
+                                <div data-toggle="quill" data-quill-placeholder="Description" id="description" data-image-url="{{ Route('news.image.store') }}">
                                     {!! old('description') !!}
                                 </div>
-                                <input type="hidden" name="description" id="description" required>
+                                <input type="hidden" name="description" data-toggle="quill-value" required>
                                 {{-- <textarea name="description" id="description" class="form-control rounded" rows="10" placeholder="Description" required>{{ old('description') }}</textarea> --}}
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
@@ -78,46 +79,5 @@
     <script src="{{ asset("assets/vendor/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
     <script src="{{ asset("assets/vendor/bootstrap-notify/notification.js") }}"></script>
     <script src="{{ asset("assets/vendor/quill/dist/quill.min.js") }}"></script>
-    <script>
-        var QuillEditor = (function() {
-            // Variables
-            var $quill = $('[data-toggle="quill"]');
-
-            // Methods
-            function init($this) {
-                // Get placeholder
-                var placeholder = $this.data('quill-placeholder');
-
-                // Init editor
-                var quill = new Quill($this.get(0), {
-                    modules: {
-                        toolbar: [
-                            ['bold', 'italic'],
-                            ['link', 'blockquote', 'code', 'image'],
-                            [{
-                                'list': 'ordered'
-                            }, {
-                                'list': 'bullet'
-                            }]
-                        ]
-                    },
-                    placeholder: placeholder,
-                    theme: 'snow'
-                });
-
-                quill.on('text-change', function(delta, oldDelta, source) {
-                    console.log(quill.root.innerHTML);
-                    document.getElementById("description").value = quill.root.innerHTML;
-                });
-            }
-
-            // Events
-            if ($quill.length) {
-                $quill.each(function() {
-                    init($(this));
-                });
-            }
-        
-        })();
-    </script>
+    <script src="{{ asset('argon') }}/js/quill-script.js"></script>
 @endpush

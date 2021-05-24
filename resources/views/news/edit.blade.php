@@ -42,10 +42,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <div data-toggle="quill" data-quill-placeholder="Description">
+                                <div data-toggle="quill" data-quill-placeholder="Description" id="description" data-image-url="{{ Route('news.image.store') }}">
                                     {!! old('description') ?? $news->description !!}
                                 </div>
-                                <input type="hidden" name="description" id="description" required>
+                                <input type="hidden" name="description" data-toggle="quill-value" required>
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
                         </div>
@@ -82,46 +82,5 @@
     <script src="{{ asset("assets/vendor/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
     <script src="{{ asset("assets/vendor/bootstrap-notify/notification.js") }}"></script>
     <script src="{{ asset("assets/vendor/quill/dist/quill.min.js") }}"></script>
-    <script>
-        var QuillEditor = (function() {
-            // Variables
-            var $quill = $('[data-toggle="quill"]');
-
-            // Methods
-            function init($this) {
-                // Get placeholder
-                var placeholder = $this.data('quill-placeholder');
-
-                // Init editor
-                var quill = new Quill($this.get(0), {
-                    modules: {
-                        toolbar: [
-                            ['bold', 'italic'],
-                            ['link', 'blockquote', 'code', 'image'],
-                            [{
-                                'list': 'ordered'
-                            }, {
-                                'list': 'bullet'
-                            }]
-                        ]
-                    },
-                    placeholder: placeholder,
-                    theme: 'snow'
-                });
-
-                quill.on('text-change', function(delta, oldDelta, source) {
-                    console.log(quill.root.innerHTML);
-                    document.getElementById("description").value = quill.root.innerHTML;
-                });
-            }
-
-            // Events
-            if ($quill.length) {
-                $quill.each(function() {
-                    init($(this));
-                });
-            }
-        
-        })();
-    </script>
+    <script src="{{ asset('argon') }}/js/quill-script.js"></script>
 @endpush
