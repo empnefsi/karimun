@@ -91,6 +91,7 @@
     <script>
         $(document).ready( function () {
             $('#dataTable').DataTable( {
+                "pagingType": "numbers",
                 responsive: true,
                 columnDefs: [
                     { responsivePriority: 2, targets: 2 },

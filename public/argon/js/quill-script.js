@@ -55,6 +55,7 @@ var QuillEditor = (function () {
         quill = new Quill($this.get(0), {
             modules: {
                 toolbar: [
+                    [{ 'header': 2 }],
                     ["bold", "italic"],
                     ["link", "blockquote", "image"],
                     [
