@@ -16,11 +16,13 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $destinations = Destination::all();
+        $carousel_sum = 3;
+        $destination_cover = Destination::take($carousel_sum)->orderBy('updated_at', 'desc')->get();
         $cover = array();
-        foreach($destinations as $destination){
-            array_push($cover, $destination->images[0]->path);
-        }
+        for($i = 0; $i < $carousel_sum; $i++){
+            array_push($cover, $destination_cover[$i]->images[0]->path);
+        }        
+
         return view('guest.index', compact('cover'));
     }
 

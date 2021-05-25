@@ -7,8 +7,8 @@
         <div class="carousel-inner">
 
             @foreach ($cover as $i => $path_img_cover)
-                <div class="carousel-item @if($i == 1) active @endif" style="background-image: url('{{ asset('storage/destinations/'.$path_img_cover) }}')">
-                    <div class="hero-wrap layer js-fullheight">
+                <div class="carousel-item @if($i == 0) active @endif">
+                    <div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path_img_cover) }}'); ">
                         <div class="layer-overlay"></div>
                     </div>
                 </div>
@@ -36,14 +36,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="destination-slider owl-carousel ftco-animate">
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">15 Listing</span>
+                    @foreach ($destinations as $destination)
+    					<div class="item">
+		    				<div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}');"></a>
+                                <div class="text p-3">
+                                    <h3>{{ $destination->name }}</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                     <div class="item">
                         <div class="destination">
                             <div class="text p-3">
