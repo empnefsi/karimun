@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Destination;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Services\FactoryHelper;
 
 class DestinationFactory extends Factory
 {
@@ -22,12 +23,13 @@ class DestinationFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->street();
+        $name = ucwords($this->faker->street());
+        $helper = new FactoryHelper;
 
         return [
             'name' => $name,
             'slug' => Str::of($name)->slug('-'),
-            'description' => $this->faker->text(),
+            'description' => $helper->createPara(10),
             'coordinate' => $this->faker->latitude() . " " . $this->faker->longitude(),
         ];
     }
