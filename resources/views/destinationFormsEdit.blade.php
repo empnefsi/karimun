@@ -11,7 +11,6 @@
     
     <div class="container-fluid">
         <a class="back" href="/destinationmanagement"><i class="fas fa-chevron-left mt-4"></i> Back</a>
-        <h1 class="c-grey-900 mt-4 text-center">Edit Destination</h1>
         <form class="form-create" id="needs-validation" role="form" method="POST" action="{{ route('destinationFormsEdit') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" novalidate>
         @csrf
             <div class="card mt-4">
