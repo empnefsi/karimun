@@ -1,5 +1,7 @@
 @extends('layouts.app', ['class' => 'bg-default'])
 
+@section('title', 'Reset Password')
+
 @section('content')
     @include('layouts.headers.guest')
 
@@ -7,11 +9,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
+                    <div class="card-header bg-transparent text-center">
+                        <h3>Reset Password</h3>
+                    </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
-                            <small>{{ __('Reset password') }}</small>
-                        </div>
-
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -26,7 +27,7 @@
 
                         <form role="form" method="POST" action="{{ route('password.email') }}">
                             @csrf
-
+                            <p style="font-size: 10pt;">Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -44,6 +45,11 @@
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Send Password Reset Link') }}</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <a href="/login" class="text-light" id="backlogin"><i class="fas fa-arrow-left"></i> Back to login</a>
                     </div>
                 </div>
             </div>
