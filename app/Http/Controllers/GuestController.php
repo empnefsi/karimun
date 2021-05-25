@@ -21,9 +21,11 @@ class GuestController extends Controller
         $cover = array();
         for($i = 0; $i < $carousel_sum; $i++){
             array_push($cover, $destination_cover[$i]->images[0]->path);
-        }        
+        }
 
-        return view('guest.index', compact('cover'));
+        $destinations = Destination::all();
+
+        return view('guest.index', compact('cover', 'destinations'));
     }
 
     /**

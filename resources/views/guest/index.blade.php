@@ -46,46 +46,6 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">San Francisco, USA</a></h3>
-                                <span class="listing">20 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Lodon, UK</a></h3>
-                                <span class="listing">10 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Lion, Singapore</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Australia</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
