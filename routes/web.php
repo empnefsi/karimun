@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin'],  function () {
 	
 		Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
 		Route::post('news-attachment-upload', [App\Http\Controllers\NewsController::class, 'attach'])->name('news.attachment.store');
+		Route::post('news-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('news.gallery.store');
 	
 		Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
 	
