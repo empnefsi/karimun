@@ -15,35 +15,6 @@ class ImageFactory extends Factory
     protected $model = Image::class;
 
     /**
-     * State dari gambarnya, 
-     * pilih satu [news, packages, destinations]
-     */
-    public function news()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'role' => 'news',
-            ];
-        });
-    }
-    public function packages()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'role' => 'packages',
-            ];
-        });
-    }
-    public function destinations()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'role' => 'destinations',
-            ];
-        });
-    }
-
-    /**
      * Define the model's default state.
      *
      * @return array

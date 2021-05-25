@@ -21,9 +21,7 @@ class DestinationSeeder extends Seeder
         Storage::makeDirectory($directory);
 
         Destination::factory(5)
-            ->has(
-                Image::factory(1)->destinations()
-            )
+            ->has(Image::factory(1))
             ->create();
     }
 }

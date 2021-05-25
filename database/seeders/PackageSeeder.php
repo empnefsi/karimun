@@ -21,9 +21,7 @@ class PackageSeeder extends Seeder
         Storage::makeDirectory($directory);
 
         Package::factory(5)
-            ->has(
-                Image::factory(1)->packages()
-            )
+            ->has(Image::factory(1))
             ->create();
     }
 }

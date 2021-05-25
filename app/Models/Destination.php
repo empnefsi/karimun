@@ -14,6 +14,6 @@ class Destination extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'foreign_id', 'destination_id');
+        return $this->morphMany(Image::class, 'imageable', 'role', 'foreign_id');
     }
 }
