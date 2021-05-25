@@ -28,11 +28,11 @@
 <section class="ftco-section ftco-destination">
     <div class="container">
         <div class="row justify-content-start mb-5 pb-3">
-      <div class="col-md-7 heading-section ftco-animate">
-          <span class="subheading">Featured</span>
-        <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
-      </div>
-    </div>
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Featured</span>
+                <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="destination-slider owl-carousel ftco-animate">
