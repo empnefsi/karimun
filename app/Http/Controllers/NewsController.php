@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Http\Requests\NewsRequest;
+use App\Http\Traits\Attachable;
 
 class NewsController extends Controller
 {
+    use Attachable;
+
+    /**
+     * return must be either news, packages, or destinations
+     * 
+     * @return string
+     */
+    public function setAttachmentType() {
+        return 'news';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +49,18 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        News::create($request->validated());
+        $news = News::create($request->validated());
+
+        $cover = $request->validated()['cover'];
+        if($cover){
+            $name = $cover->getClientOriginalName();
+            $path = $cover->storeAs('public/news/',$name);
+
+            $image = $news->images()->create([
+                'role' => 'news',
+                'path' => $name,
+            ]);
+        }
 
         return redirect('news')->with('status','News was successfully created');
     }

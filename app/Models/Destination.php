@@ -10,6 +10,7 @@ class Destination extends Model
     use HasFactory;
 
     protected $primaryKey = 'destination_id';
+    protected $fillable = ['name', 'slug', 'description', 'coordinate'];
 
     public function images()
     {

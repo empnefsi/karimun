@@ -34,7 +34,7 @@ class NewsRequest extends FormRequest
     {
         $news_id = isset($this->news) ? $this->news->news_id : null;
 
-        return [
+        $rules = [
             'title' => [
                             'required',
                             'max:255',
@@ -46,7 +46,14 @@ class NewsRequest extends FormRequest
                             Rule::unique('news')->ignore($news_id, 'news_id'),
                         ],
             'description' => 'required',
+            'cover' => ['required', 'image'],
         ];
+
+        if (isset($this->news)) {
+            $rules['cover'] = ['image'];
+        }
+
+        return $rules;
     }
     
     /**
