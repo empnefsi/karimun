@@ -30,6 +30,6 @@ class Package extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'foreign_id', 'package_id');
+        return $this->morphMany(Image::class, 'imageable', 'role', 'foreign_id');
     }
 }
