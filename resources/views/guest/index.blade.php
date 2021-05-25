@@ -6,23 +6,13 @@
 
         <div class="carousel-inner">
 
-            <div class="carousel-item active">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
+            @foreach ($cover as $i => $path_img_cover)
+                <div class="carousel-item @if($i == 0) active @endif">
+                    <div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path_img_cover) }}'); ">
+                        <div class="layer-overlay"></div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>
@@ -38,62 +28,24 @@
 <section class="ftco-section ftco-destination">
     <div class="container">
         <div class="row justify-content-start mb-5 pb-3">
-      <div class="col-md-7 heading-section ftco-animate">
-          <span class="subheading">Featured</span>
-        <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
-      </div>
-    </div>
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Featured</span>
+                <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="destination-slider owl-carousel ftco-animate">
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">15 Listing</span>
+                    @foreach ($destinations as $destination)
+    					<div class="item">
+		    				<div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}');"></a>
+                                <div class="text p-3">
+                                    <h3>{{ $destination->name }}</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">San Francisco, USA</a></h3>
-                                <span class="listing">20 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Lodon, UK</a></h3>
-                                <span class="listing">10 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Lion, Singapore</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Australia</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -102,158 +54,28 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
-            <div class="row justify-content-start mb-5 pb-3">
-      <div class="col-md-7 heading-section ftco-animate">
-          <span class="subheading">Special Offers</span>
-        <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
-      </div>
-    </div>    		
-    </div>
-    <div class="container">
+        <div class="row justify-content-start mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Special Offers</span>
+                <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
+            </div>
+        </div>
+        
         <div class="row">
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
+            <div class="col-md-12">
+                <div class="destination-slider owl-carousel ftco-animate">
+                    @foreach ($packages as $package)
+    					<div class="item">
+		    				<div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$package->images[0]->path) }}');"></a>
+                                <div class="text p-3">
+                                    <div class="one">
+                                        {{ $package->name }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

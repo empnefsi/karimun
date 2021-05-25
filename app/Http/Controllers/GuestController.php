@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Models\News;
+use App\Models\Package;
+use App\Models\Destination;
 
 class GuestController extends Controller
 {
@@ -18,7 +20,18 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guest.index');
+        $carousel_sum = 3;
+        $destination_cover = Destination::take($carousel_sum)->orderBy('updated_at', 'desc')->get();
+        $cover = array();
+        for($i = 0; $i < $carousel_sum; $i++){
+            array_push($cover, $destination_cover[$i]->images[0]->path);
+        }
+
+        $destinations = Destination::take(5)->get();
+
+        $packages = Package::take(5)->get();
+
+        return view('guest.index', compact('cover', 'destinations', 'packages'));
     }
 
     /**
