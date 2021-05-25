@@ -29,7 +29,7 @@
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Destinations <br></strong></h1>
+        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Packages <br></strong></h1>
         <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
     </div>
 
@@ -58,7 +58,7 @@
                           <hr>
                           <p class="bottom-area d-flex">
                               <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                              <span class="ml-auto"><a href="detail-package.php">View</a></span>
+                              <span class="ml-auto"><a href="{{ route('package-detail') }}">View</a></span>
                           </p>
                       </div>
                       </div>

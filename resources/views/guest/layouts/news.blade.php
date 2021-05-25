@@ -29,8 +29,8 @@
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Destinations <br></strong></h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
+        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>News<br></strong></h1>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Updated News About Karimun Jawa</p>
     </div>
 
 </div>
@@ -51,7 +51,7 @@
                   <div><a href="#">Admin</a></div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                   <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
+                    <span class="ml-auto text-center"><a href="{{ route('news-detail') }}">View</a></span>
                   </p>
               </div>
             </div>
