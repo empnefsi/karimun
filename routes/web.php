@@ -25,11 +25,11 @@ Route::group(['guest'], function(){
 	
 	Route::get('/contact', [App\Http\Controllers\GuestController::class, 'contact'])->name('contact');
 	
-	Route::get('/destinations/detail', [App\Http\Controllers\GuestController::class, 'destinationDetail'])->name('destination-detail');
+	Route::get('/destinations/{slug}', [App\Http\Controllers\GuestController::class, 'destinationDetail'])->name('destination-detail');
 	
 	Route::get('/packages/detail', [App\Http\Controllers\GuestController::class, 'packageDetail'])->name('package-detail');
 	
-	Route::get('/news/detail', [App\Http\Controllers\GuestController::class, 'newsDetail'])->name('news-detail');
+	Route::get('/news/{slug}', [App\Http\Controllers\GuestController::class, 'newsDetail'])->name('news-detail');
 });
 
 /*

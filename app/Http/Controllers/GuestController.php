@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Destination;
+use App\Models\Package;
 use App\Models\News;
 
 class GuestController extends Controller
@@ -24,7 +28,12 @@ class GuestController extends Controller
      */
     public function destination()
     {
-        return view('guest.layouts.destination');
+        $cover = Destination::take(3)->get();
+        $destination = Destination::paginate(6);
+
+        // dd($destination);
+        
+        return view('guest.layouts.destination', compact('cover', 'destination'));
     }
 
     /**
@@ -44,7 +53,11 @@ class GuestController extends Controller
      */
     public function news()
     {
-        return view('guest.layouts.news');
+        $cover = News::take(3)->get();
+        $news = News::paginate(8);
+
+        // dd($news);
+        return view('guest.layouts.news', compact('cover', 'news'));
     }
 
     /**
@@ -62,9 +75,12 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destinationDetail()
+    public function destinationDetail($slug)
     {
-        return view('guest.layouts.destination-detail');
+        $detail = Destination::where('destinations.slug', '=', $slug)->first();
+
+        dd($detail);
+        return view('guest.layouts.destination-detail', compact('detail'));
     }
     
     /**
@@ -74,6 +90,7 @@ class GuestController extends Controller
      */
     public function packageDetail()
     {
+ 
         return view('guest.layouts.package-detail');
     }
     
@@ -82,8 +99,12 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function newsDetail()
+    public function newsDetail($slug)
     {
-        return view('guest.layouts.news-detail');
+        $news = News::where('news.slug', '=', $slug)->first();
+
+        dd($news);
+        
+        return view('guest.layouts.news-detail', compact('news'));
     }
 }

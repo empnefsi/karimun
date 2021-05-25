@@ -35,154 +35,31 @@
 
 </div>
 
-
   <section class="ftco-section bg-light">
     <div class="container">
       <div class="row d-flex">
+        
+        @foreach ($news as $nws)            
         <div class="col-md-3 d-flex ftco-animate">
           <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
+            <a href="#" class="block-20" style="">
             </a>
             <div class="text p-4 d-block">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
+                <span class="tag">Updated News</span>
+              <h3 class="heading mt-3">{{$nws->title}}</h3>
               <div class="meta mb-3">
-                  <div><a href="#">August 12, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
+                  <div>{{$nws->created_at}}</div>
+                  <div>>Admin</div>
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                   <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="{{ route('news-detail') }}">View</a></span>
+                    <span class="ml-auto text-center"><a href="{{ route('news') }}/{{$nws->slug}}">View</a></span>
                   </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Culture</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4 d-block">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Culture</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="news-detail.php" class="block-20" style="">
-            </a>
-            <div class="text p-4">
-                <span class="tag">Tips, Travel</span>
-              <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-              <div class="meta mb-3">
-                <div><a href="#">August 12, 2018</a></div>
-                <div><a href="#">Admin</a></div>
-                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                <p class="bottom-area d-flex">
-                    <span class="ml-auto text-center"><a href="news-detail.php">View</a></span>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforeach
+   
       </div>
       <div class="row mt-5">
         <div class="col text-center">

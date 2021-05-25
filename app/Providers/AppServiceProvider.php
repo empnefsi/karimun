@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Carbon\Carbon;
 
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {        
         Relation::morphMap([
             'news' => 'App\Models\News',
             'destination' => 'App\Models\Destination',
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
 
         config(['app.locale' => 'id']);
 	    Carbon::setLocale('id');
+        Paginator::useBootstrap();
     }
 }

@@ -3,10 +3,21 @@
 @section('content')
 <div class="container-carousel">
     <div id="carouselLandingPage" class="carousel slide carousel-page" data-ride="carousel">
-
+        
+        {{-- <img src="{{ asset('/storage/destinations/'.$destinations->images[0]->path) }}" alt="cover" class="img-fluid" width="320px" height="100%"> --}}
+        
         <div class="carousel-inner">
-
+            @foreach ($cover as $i => $path)
+                
             <div class="carousel-item active">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path) }}');>
+                    <div class="layer-overlay"></div>
+                </div>
+            </div>
+
+            @endforeach
+
+            {{-- <div class="carousel-item">
                 <div class="hero-wrap layer js-fullheight">
                     <div class="layer-overlay"></div>
                 </div>
@@ -16,13 +27,7 @@
                 <div class="hero-wrap layer js-fullheight">
                     <div class="layer-overlay"></div>
                 </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -40,137 +45,44 @@
       <div class="row">
         <div class="col-lg-12">
             <div class="row">
+                
+                @foreach ($destination as $dst)      
                 <div class="col-md-4 ftco-animate">
                   <div class="destination">
                       <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
+                      <img src="{{ asset('/storage/destinations/'.$dst->images) }}" alt="cover" class="img-fluid" width="320px" height="100%">
                       <div class="text p-3">
                           <div class="d-flex">
                               <div class="one">
-                                  <h3><a href="#">Paris, Italy</a></h3>
+                                  <h3><a href="#">{{$dst->name}}</a></h3>
                               </div>
                           </div>
-
                           <p>Far far away, behind the word mountains, far from the countries</p>
                           <p class="days"><span>2 days 3 nights</span></p>
                           <hr>
                           <p class="bottom-area d-flex">
                               <span><i class="icon-map-o"></i>Location</span> 
-                              <span class="ml-auto"><a href="{{ route('destination-detail') }}">View</a></span>
+                              <span class="ml-auto"><a href="{{ route('destinations') }}/{{ $dst->slug }}">View</a></span>
                           </p>
                       </div>
-                      </div>
-                      </div>
-                      <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                              <div class="text p-3">
-                                  <div class="d-flex">
-                                      <div class="one">
-                                          <h3><a href="#">Paris, Italy</a></h3>
-                                      </div>
-
-                                  </div>
-                                  <p>Far far away, behind the word mountains, far from the countries</p>
-                                  <p class="days"><span>2 days 3 nights</span></p>
-                                  <hr>
-                                  <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>Location</span> 
-                                      <span class="ml-auto"><a href="detail-destination.php">View</a></span>
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                              <div class="text p-3">
-                                  <div class="d-flex">
-                                      <div class="one">
-                                          <h3><a href="#">Paris, Italy</a></h3>
-                                      </div>
-
-                                  </div>
-                                  <p>Far far away, behind the word mountains, far from the countries</p>
-                                  <p class="days"><span>2 days 3 nights</span></p>
-                                  <hr>
-                                  <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>Location</span> 
-                                      <span class="ml-auto"><a href="detail-destination.php">View</a></span>
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                              <div class="text p-3">
-                                  <div class="d-flex">
-                                      <div class="one">
-                                          <h3><a href="#">Paris, Italy</a></h3>
-                                      </div>
-
-                                  </div>
-                                  <p>Far far away, behind the word mountains, far from the countries</p>
-                                  <p class="days"><span>2 days 3 nights</span></p>
-                                  <hr>
-                                  <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>Location</span> 
-                                      <span class="ml-auto"><a href="detail-destination.php">View</a></span>
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                              <div class="text p-3">
-                                  <div class="d-flex">
-                                      <div class="one">
-                                          <h3><a href="#">Paris, Italy</a></h3>
-                                      </div>
-                                  </div>
-                                  <p>Far far away, behind the word mountains, far from the countries</p>
-                                  <p class="days"><span>2 days 3 nights</span></p>
-                                  <hr>
-                                  <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>Location</span> 
-                                      <span class="ml-auto"><a href="detail-destination.php">View</a></span>
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4 ftco-animate">
-                          <div class="destination">
-                              <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                              <div class="text p-3">
-                                  <div class="d-flex">
-                                      <div class="one">
-                                          <h3><a href="#">Paris, Italy</a></h3>
-                                      </div>
-
-                                  </div>
-                                  <p>Far far away, behind the word mountains, far from the countries</p>
-                                  <p class="days"><span>2 days 3 nights</span></p>
-                                  <hr>
-                                  <p class="bottom-area d-flex">
-                                      <span><i class="icon-map-o"></i>Location</span> 
-                                      <span class="ml-auto"><a href="detail-destination.php">View</a></span>
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
+
             <div class="row mt-5">
                 <div class="col text-center">
-                  <div class="block-27">
+                    {{ $destination->links() }}
+                  {{-- <div class="block-27">
                     <ul>
                       <li><a href="#">&lt;</a></li>
                       <li class="active"><span>1</span></li>
                       <li><a href="#">&gt;</a></li>
                     </ul>
-                  </div>
+                  </div> --}}
                 </div>
-              </div>
+            </div>
+
         </div> <!-- .col-md-8 -->
       </div>
     </div>
