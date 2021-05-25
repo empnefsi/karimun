@@ -62,7 +62,7 @@ class NewsController extends Controller
             ]);
         }
 
-        return redirect('news')->with('status','News was successfully created');
+        return redirect()->route('news.index')->with('status','News was successfully created');
     }
 
     /**
@@ -98,7 +98,7 @@ class NewsController extends Controller
     {
         News::find($news->news_id)->update($request->validated());
         
-        return redirect('news')->with('status','News was successfully updated');
+        return redirect()->route('news.index')->with('status','News was successfully updated');
     }
 
     /**
@@ -111,6 +111,6 @@ class NewsController extends Controller
     {
         News::destroy($news->news_id);
 
-        return redirect('news')->with('status','News was successfully deleted');
+        return redirect()->route('news.index')->with('status','News was successfully deleted');
     }
 }
