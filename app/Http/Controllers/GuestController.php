@@ -23,9 +23,11 @@ class GuestController extends Controller
             array_push($cover, $destination_cover[$i]->images[0]->path);
         }
 
-        $destinations = Destination::all();
+        $destinations = Destination::take(5)->get();
 
-        return view('guest.index', compact('cover', 'destinations'));
+        $packages = Package::take(5)->get();
+
+        return view('guest.index', compact('cover', 'destinations', 'packages'));
     }
 
     /**
