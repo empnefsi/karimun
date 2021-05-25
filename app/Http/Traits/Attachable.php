@@ -3,6 +3,8 @@
 namespace App\Http\Traits;
 
 use App\Http\Requests\AttachmentRequest;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 trait Attachable {
     
@@ -25,7 +27,9 @@ trait Attachable {
         $this->isTypeQualified($this->setAttachmentType());
 
         $name = $request['image']->getClientOriginalName();
-        $request['image']->storeAs('public/'.$this->setAttachmentType().'/attachment',$name);
+        $img = Image::make($request['image']->getRealPath())->encode('jpg', 0)->widen(600)->orientate();
+        $img->stream();
+        Storage::disk('local')->put("public/{$this->setAttachmentType()}/attachment/" . $name, $img, 'public');
         
         $path = "storage/".$this->setAttachmentType()."/attachment/{$name}";
 
