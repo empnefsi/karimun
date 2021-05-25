@@ -10,11 +10,26 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
+| *Custom addition* Written below is for guest
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['guest'], function(){
+	Route::get('/', [App\Http\Controllers\GuestController::class, 'index'])->name('welcome');
+	
+	Route::get('/destinations', [App\Http\Controllers\GuestController::class, 'destination'])->name('destinations');
+	
+	Route::get('/packages', [App\Http\Controllers\GuestController::class, 'package'])->name('packages');
+	
+	Route::get('/news', [App\Http\Controllers\GuestController::class, 'news'])->name('news');
+	
+	Route::get('/contact', [App\Http\Controllers\GuestController::class, 'contact'])->name('contact');
+	
+	Route::get('/destinations/detail', [App\Http\Controllers\GuestController::class, 'destinationDetail'])->name('destination-detail');
+	
+	Route::get('/packages/detail', [App\Http\Controllers\GuestController::class, 'packageDetail'])->name('package-detail');
+	
+	Route::get('/news/detail', [App\Http\Controllers\GuestController::class, 'newsDetail'])->name('news-detail');
 });
 
 Auth::routes();
