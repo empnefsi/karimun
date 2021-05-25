@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Http\Requests\NewsRequest;
+use App\Http\Traits\Attachable;
 
 class NewsController extends Controller
 {
+    use Attachable;
+
+    /**
+     * return must be either news, packages, or destinations
+     * 
+     * @return string
+     */
+    public function setAttachmentType() {
+        return 'news';
+    }
+
     /**
      * Display a listing of the resource.
      *

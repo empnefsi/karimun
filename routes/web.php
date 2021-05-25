@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
 	Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
-	Route::post('news-image-upload', [App\Http\Controllers\ImageController::class, 'news'])->name('news.image.store');
+	Route::post('news-attachment-upload', [App\Http\Controllers\NewsController::class, 'attach'])->name('news.attachment.store');
 
 	Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
 

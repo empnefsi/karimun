@@ -38,7 +38,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <div data-toggle="quill" data-quill-placeholder="Description" id="description" data-image-url="{{ Route('news.image.store') }}">
+                                <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('news.attachment.store') }}">
                                     {!! old('description') !!}
                                 </div>
                                 <input type="hidden" name="description" data-toggle="quill-value" required>
