@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Package;
+use App\Models\Destination;
 
 class GuestController extends Controller
 {
@@ -14,7 +16,12 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('guest.index');
+        $destinations = Destination::all();
+        $cover = array();
+        foreach($destinations as $destination){
+            array_push($cover, $destination->images[0]->path);
+        }
+        return view('guest.index', compact('cover'));
     }
 
     /**
