@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -26,10 +30,6 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withErrors(['not_allow_profile' => __('You are not allowed to change data for a default user.')]);
-        }
-
         auth()->user()->update($request->all());
 
         return back()->withStatus(__('Profile successfully updated.'));
@@ -43,12 +43,32 @@ class ProfileController extends Controller
      */
     public function password(PasswordRequest $request)
     {
-        if (auth()->user()->id == 1) {
-            return back()->withErrors(['not_allow_password' => __('You are not allowed to change the password for a default user.')]);
-        }
-
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
         return back()->withPasswordStatus(__('Password successfully updated.'));
+    }
+
+    public function save_image(Request $request) {
+        $user = User::find(auth()->user()->id);   
+        Storage::delete('public/profile/'.auth()->user()->picture);
+        if ($request->hasFile('picture')) {
+            $completeFileName = $request->file('picture')->getClientOriginalName();
+            $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $compPic = str_replace(' ', '_', $fileNameOnly).'-'. rand() .'_'.time().'.'.$extension;
+            $path = $request->file('picture')->storeAs('public/profile/', $compPic);
+            $user->picture = $compPic;
+        }
+        $user->save();
+        return redirect('/profile')->with('status', 'Profile has been updated successfully!');
+   }
+
+   public function showEdit($slug)
+    {
+        $profile = DB::table('users')
+        ->where('id', '=', 1)
+        ->get();
+        
+        return view('profile.edit', ['profile' => $profile]);
     }
 }
