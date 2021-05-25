@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration
             $table->bigIncrements('package_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('description');
+            $table->longText('description');
             $table->bigInteger('price');
             $table->timestamps();
         });
