@@ -32,6 +32,18 @@ Route::group(['guest'], function(){
 	Route::get('/news/detail', [App\Http\Controllers\GuestController::class, 'newsDetail'])->name('news-detail');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+| *Custom addition* Written below is for admin
+|
+*/
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin'],  function () {
