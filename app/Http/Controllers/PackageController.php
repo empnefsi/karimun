@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use Illuminate\Http\Request;
 use App\Http\Requests\PackageRequest;
+use App\Http\Traits\Attachable;
 
 class PackageController extends Controller
 {
+    use Attachable;
+
+    /**
+     * return must be either news, packages, or destinations
+     * 
+     * @return string
+     */
+    public function setAttachmentType() {
+        return 'packages';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,14 +45,32 @@ class PackageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PackageRequest  $request
+     * @param  \App\Http\Requests\PackageRequest
      * @return \Illuminate\Http\Response
      */
     public function store(PackageRequest $request)
     {
-        Package::create($request->validated());
+        // dd($request);
+        $packages = Package::create($request->validated());
 
-        return redirect('packages')->with('status','Package was successfully created');
+        $cover = $request->validated()['cover'];
+        if($cover){
+            $name = $cover->getClientOriginalName();
+            $path = $cover->storeAs('public/packages/',$name);
+
+            $image = $packages->images()->create([
+                'role' => 'package',
+                'path' => $name,
+            ]);
+        }
+        foreach($request->document as $document){
+            $packages->images()->create([
+                'role' => 'package',
+                'path' => $document,
+            ]);
+        }
+
+        return redirect('admin/packages')->with('status','Package was successfully created');
     }
 
     /**
@@ -61,6 +92,7 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
+        // dd($package->images);
         return view('packages.edit', compact('package'));
     }
 
@@ -75,7 +107,7 @@ class PackageController extends Controller
     {
         Package::find($package->package_id)->update($request->validated());
 
-        return redirect('packages')->with('status','Package was successfully updated');
+        return redirect('admin/packages')->with('status','Package was successfully updated');
     }
 
     /**
@@ -88,6 +120,6 @@ class PackageController extends Controller
     {
         Package::destroy($package->package_id);
 
-        return redirect('packages')->with('status','Package was successfully deleted');
+        return redirect('admin/packages')->with('status','Package was successfully deleted');
     }
 }

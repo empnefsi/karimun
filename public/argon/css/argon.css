@@ -17207,8 +17207,6 @@ table.dataTable tbody > tr.selected {
   background-color: #5e72e4;
 }
 
-.dataTables_length,
-.dataTables_info,
 .dt-buttons {
   padding-left: 1.5rem;
 }
@@ -17218,7 +17216,6 @@ table.dataTable tbody > tr.selected {
 }
 
 .dataTables_filter {
-  padding-right: 1.5rem;
   display: inline-block;
   float: right;
 }

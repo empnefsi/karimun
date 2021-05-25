@@ -16,13 +16,17 @@ var Dropzones = (function () {
             headers: {
                 "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content"),
             },
+            success: function (response) {
+                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+            },
             thumbnailWidth: null,
             thumbnailHeight: null,
             previewsContainer: preview.get(0),
             previewTemplate: preview.html(),
+            parallelUploads: 10,
             maxFiles: !multiple ? 1 : null,
             acceptedFiles: !multiple ? "image/*" : null,
-            autoProcessQueue: false,
+            autoProcessQueue: true,
             init: function () {
                 this.on("addedfile", function (file) {
                     if (!multiple && currentFile) {
@@ -30,14 +34,6 @@ var Dropzones = (function () {
                     }
                     currentFile = file;
                 });
-
-                var myDropzone = this;
-                
-                // Update selector to match your button
-                $("#submit").click(function (e) {
-                    myDropzone.processQueue();
-                });
-                
             },
         };
 

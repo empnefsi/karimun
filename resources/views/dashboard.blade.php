@@ -16,7 +16,7 @@
                                 <h2 class="text-white mb-0">Total Visit</h2>
                             </div>
                             <div class="col">
-                                <ul class="nav nav-pills justify-content-end">
+                                <!-- <ul class="nav nav-pills justify-content-end">
                                     <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data": window.data}]}}'>
                                         <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
                                             <span class="d-none d-md-block">Daily</span>
@@ -29,7 +29,7 @@
                                             <span class="d-md-none">M</span>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                     </div>
