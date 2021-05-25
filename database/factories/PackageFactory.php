@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Services\FactoryHelper;
 
 class PackageFactory extends Factory
 {
@@ -22,12 +23,13 @@ class PackageFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->sentence(2);
+        $name = ucwords($this->faker->sentence(2));
+        $helper = new FactoryHelper;
 
         return [
             'name' => $name,
             'slug' => Str::of($name)->slug('-'),
-            'description' => $this->faker->text(),
+            'description' => $helper->createPara(10),
             'price' => $this->faker->randomDigitNotNull() . "000000",
         ];
     }
