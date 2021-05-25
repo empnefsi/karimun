@@ -31,5 +31,17 @@ Route::group(['prefix' => 'admin'],  function () {
 		Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
 		Route::get('table-list', function () {return view('pages.tables');})->name('table');
 		Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+	
+		Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
+		Route::post('news-attachment-upload', [App\Http\Controllers\NewsController::class, 'attach'])->name('news.attachment.store');
+	
+		Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
+	
+		Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
+		Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
+		Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
+		Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
+		Route::get('editdestination/{slug}', [App\Http\Controllers\DestinationController::class, 'showEdit']);
+		Route::post('/destinationFormsEdit', [App\Http\Controllers\DestinationController::class, 'update'])->name('destinationFormsEdit');
 	});
 });
