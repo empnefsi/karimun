@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
-use Illuminate\Http\Request;
+use App\Http\Requests\PackageRequest;
 
 class PackageController extends Controller
 {
@@ -14,7 +14,9 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        $packages = Package::all();
+
+        return view('packages.index', compact('packages'));
     }
 
     /**
@@ -24,18 +26,20 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        return view('packages.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PackageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PackageRequest $request)
     {
-        //
+        Package::create($request->validated());
+
+        return redirect('packages')->with('status','Package was successfully created');
     }
 
     /**
@@ -57,19 +61,21 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        return view('packages.edit', compact('package'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PackageRequest  $request
      * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Package $package)
+    public function update(PackageRequest $request, Package $package)
     {
-        //
+        Package::find($package->package_id)->update($request->validated());
+
+        return redirect('packages')->with('status','Package was successfully updated');
     }
 
     /**
@@ -80,6 +86,8 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        Package::destroy($package->package_id);
+
+        return redirect('packages')->with('status','Package was successfully deleted');
     }
 }
