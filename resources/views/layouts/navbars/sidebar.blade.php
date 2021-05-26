@@ -61,12 +61,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/destinationmanagement">
+                    <a class="nav-link" href="{{ route('destinations.index') }}">
                         <i class="ni ni-bullet-list-67 text-default"></i> {{ __('Destination Management') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ Route('news.index') }}">
+                    <a class="nav-link" href="{{ route('news.index') }}">
                         <i class="ni ni-archive-2 text-default"></i> {{ __('News Management') }}
                     </a>
                 </li>
