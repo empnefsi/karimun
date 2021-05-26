@@ -33,7 +33,7 @@
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
         @yield('css')
     </head>
-    <body class="{{ $class ?? '' }}">
+    <body class="{{ $class ?? '' }} @yield('class')">
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
