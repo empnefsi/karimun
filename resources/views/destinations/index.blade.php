@@ -3,11 +3,10 @@
 @section('title', 'Destination Management')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset("assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css") }}">
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.css"/> -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')
@@ -106,11 +105,13 @@
     <script src="{{ asset('assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.js"></script>
+
     <script src="{{ asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap-notify/notification.js') }}"></script>
     <script>
         $(document).ready( function () {
             $('#dataTable').DataTable( {
+                "pagingType": "numbers",
                 responsive: true
             } );
         } );
