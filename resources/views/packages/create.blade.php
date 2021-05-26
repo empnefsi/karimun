@@ -3,7 +3,7 @@
 @section('title', 'Add Package')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset("assets/vendor/quill/dist/quill.core.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
                                 <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('packages.attachment.store') }}">
                                     {!! old('description') !!}
                                 </div>
-                                <input type="hidden" name="description" data-toggle="quill-value" required>
+                                <input type="hidden" name="description" data-toggle="quill-value" value="{{ old('description') }}" required>
                                 {{-- <textarea name="description" id="description" class="form-control rounded" rows="10" placeholder="Description" required>{{ old('description') }}</textarea> --}}
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
@@ -117,13 +117,20 @@
             };
         </script>
     @enderror
+    @if (session('status'))
+        <script>
+            window.onload = () => {
+                showNotification('top', 'right', 'warning', '<?php echo session('status') ?>');
+            };
+        </script>
+    @endif
 @endsection
 
 @push('scripts')
-    <script src="{{ asset("assets/vendor/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
-    <script src="{{ asset("assets/vendor/bootstrap-notify/notification.js") }}"></script>
-    <script src="{{ asset("assets/vendor/quill/dist/quill.min.js") }}"></script>
-    <script src="{{ asset("assets/vendor/dropzone/dist/min/dropzone.min.js") }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-notify/notification.js') }}"></script>
+    <script src="{{ asset('assets/vendor/quill/dist/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('argon') }}/js/quill-script.js"></script>
     <script src="{{ asset('argon') }}/js/dropzone-script.js"></script>
 @endpush

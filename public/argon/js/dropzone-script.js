@@ -19,12 +19,22 @@ var Dropzones = (function () {
             success: function (response) {
                 $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
             },
+            removedfile: function (file) {
+                file.previewElement.remove()
+                var name = ''
+                if (typeof file.file_name !== 'undefined') {
+                  name = file.file_name
+                } else {
+                  name = uploadedDocumentMap[file.name]
+                }
+                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+            },
             thumbnailWidth: null,
             thumbnailHeight: null,
             previewsContainer: preview.get(0),
             previewTemplate: preview.html(),
             parallelUploads: 10,
-            maxFiles: null,
+            maxFiles: !multiple ? 1 : null,
             acceptedFiles: !multiple ? "image/*" : null,
             autoProcessQueue: true,
             init: function () {

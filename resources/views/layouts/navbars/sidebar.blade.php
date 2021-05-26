@@ -95,7 +95,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ Route('packages.index') }}">
-                        <i class="ni ni-archive-2 text-default"></i> {{ __('Package Management') }}
+                        <i class="ni ni-bag-17 text-default"></i> {{ __('Package Management') }}
                     </a>
                 </li>
                 <!-- <li class="nav-item">

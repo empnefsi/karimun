@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\PackageRequest;
 use App\Http\Traits\Attachable;
+use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
@@ -50,25 +53,31 @@ class PackageController extends Controller
      */
     public function store(PackageRequest $request)
     {
-        // dd($request);
-        $packages = Package::create($request->validated());
-
-        $cover = $request->validated()['cover'];
-        if($cover){
-            $name = $cover->getClientOriginalName();
-            $path = $cover->storeAs('public/packages/',$name);
-
-            $image = $packages->images()->create([
-                'role' => 'package',
-                'path' => $name,
-            ]);
+        dd($request);
+        if($request->document){
+            $packages = Package::create($request->validated());
+            $cover = $request->validated()['cover'];
+            if($cover){
+                $ext = $cover->getClientOriginalExtension();
+                $name = Str::random(40).'.'.$ext;
+                $path = $cover->storeAs('public/packages/',$name);
+    
+                $image = $packages->images()->create([
+                    'role' => 'package',
+                    'path' => $name,
+                ]);
+            }
+            foreach($request->document as $document){
+                $packages->images()->create([
+                    'role' => 'package',
+                    'path' => $document,
+                ]);
+            }
         }
-        foreach($request->document as $document){
-            $packages->images()->create([
-                'role' => 'package',
-                'path' => $document,
-            ]);
+        else {
+            return back()->with('status', 'Gallery must not be empty');
         }
+
 
         return redirect('admin/packages')->with('status','Package was successfully created');
     }
@@ -106,17 +115,22 @@ class PackageController extends Controller
     public function update(PackageRequest $request, Package $package)
     {
         Package::find($package->package_id)->update($request->validated());
-        $cover = $request->validated()['cover'];
-        if($cover){
-            $name = $cover->getClientOriginalName();
-            $path = $cover->storeAs('public/packages/',$name);
+        if($request->cover){
+            $cover = $request->validated()['cover'];
+            if($cover){
+                $name = $cover->getClientOriginalName();
+                $path = $cover->storeAs('public/packages/',$name);
 
-            $image = $package->images()->create([
-                'role' => 'package',
-                'path' => $name,
-            ]);
+                $old = Image::where('foreign_id', $package->package_id)->first();
+                Storage::delete('public/packages/'.$old->path);
+
+                Image::where('foreign_id', $package->package_id)->limit(1)->update([
+                    'role' => 'package',
+                    'path' => $name,
+                ]);
+            }
         }
-        // dd($request->document);
+
         if($request->document){
             foreach($request->document as $document){
                 $package->images()->create([

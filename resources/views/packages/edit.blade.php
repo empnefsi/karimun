@@ -46,7 +46,7 @@
                                 <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('packages.attachment.store') }}">
                                     {!! old('description') ?? $package->description !!}
                                 </div>
-                                <input type="hidden" name="description" data-toggle="quill-value" required>
+                                <input type="hidden" name="description" data-toggle="quill-value" value="{{ old('description') ?? $package->description }}" required>
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
                         </div>
@@ -108,6 +108,9 @@
                     @if($i>1)
                         <label id="current">Current Gallery</label><br>
                     @endif
+                    <script>
+                        var count = {{ $i-1 }};
+                    </script>
                     @for($j=1; $j<$i; $j++)
                     <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush" id="current{{$package->images[$j]->image_id}}">
                         <li class="list-group-item px-0">
@@ -134,24 +137,30 @@
                                 </div>
                                 <script>
                                     $('#{{$package->images[$j]->image_id}}').on('click',function(){
-                                        var id = "{{$package->images[$j]->image_id}}";
-                                        var val = "{{$package->images[$j]->path}}";
-                                        var count = {{ $i }};
-                                        $.ajax({
-                                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                                            url: "{{ route('packages.gallery.delete') }}",
-                                            type: 'POST',
-                                            data: {id: id, val: val, _token: '{{csrf_token()}}'},
-                                            success: function (data){
-                                                if(data == "Success"){
-                                                    $('#current{{$package->images[$j]->image_id}}').html('');
-                                                    count--;
-                                                    if(count==1){
-                                                        $('#current').html('');
+                                        var accept = confirm("Are you sure to delete this picture?");
+                                        if(accept){
+                                            var id = "{{$package->images[$j]->image_id}}";
+                                            var val = "{{$package->images[$j]->path}}";
+                                            $.ajax({
+                                                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                                url: "{{ route('packages.gallery.delete') }}",
+                                                type: 'POST',
+                                                data: {
+                                                    id: id, 
+                                                    val: val, 
+                                                    _token: '{{csrf_token()}}'
+                                                },
+                                                success: function (data){
+                                                    if(data == "Success"){
+                                                        $('#current{{$package->images[$j]->image_id}}').html('');
+                                                        count--;
+                                                        if(count==0){
+                                                            $('#current').html('');
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     });
                                 </script>
                             </div>
