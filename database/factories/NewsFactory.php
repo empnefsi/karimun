@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Services\FactoryHelper;
 
 class NewsFactory extends Factory
 {
@@ -22,12 +23,13 @@ class NewsFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence();
+        $title = ucwords($this->faker->sentence());
+        $helper = new FactoryHelper;
         
         return [
             'title' => $title,
             'slug' => Str::of($title)->slug('-'),
-            'description' => $this->faker->text(),
+            'description' => $helper->createPara(10),
         ];
     }
 }
