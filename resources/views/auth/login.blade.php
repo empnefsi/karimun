@@ -2,13 +2,15 @@
 
 @section('title', 'Login')
 
+@section('class', 'backauth')
+
 @section('content')
     @include('layouts.headers.guest')
 
-    <div class="container mt--8 pb-5">
+    <div class="container pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7 mt-4">
-                <div class="card bg-secondary shadow border-0">
+                <div class="card bg-secondary shadow border-0 mt-8">
                     <div class="card-header bg-transparent text-center">
                         <h3>Sign In</h3>
                     </div>
@@ -42,11 +44,15 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="custom-control custom-control-alternative custom-checkbox">
-                                <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="customCheckLogin">
-                                    <span class="text-muted">{{ __('Remember me') }}</span>
-                                </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-control-alternative custom-checkbox">
+                                        <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="customCheckLogin">
+                                            <span class="text-muted">{{ __('Remember me') }}</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>

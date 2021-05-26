@@ -2,13 +2,15 @@
 
 @section('title', 'Reset Password')
 
+@section('class', 'backauth')
+
 @section('content')
     @include('layouts.headers.guest')
 
-    <div class="container mt--8 pb-5">
+    <div class="container pb-5">
         <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary shadow border-0">
+            <div class="col-lg-5 col-md-7 mt-4">
+                <div class="card bg-secondary shadow border-0 mt-8">
                     <div class="card-header bg-transparent text-center">
                         <h3>Reset Password</h3>
                     </div>
