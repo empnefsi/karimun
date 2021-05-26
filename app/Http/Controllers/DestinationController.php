@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\Attachable;
 
 class DestinationController extends Controller
 {
+    use Attachable;
+
+    /**
+     * return must be either news, packages, or destinations
+     * 
+     * @return string
+     */
+    public function setAttachmentType() {
+        return 'destinations';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,18 +32,7 @@ class DestinationController extends Controller
     {
         $destination = DB::table('destinations')
         ->get();
-        // dd($destination);
-        return view ('destination', ['destination' => $destination]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view ('destinations.index', ['destination' => $destination]);
     }
 
     /**
@@ -84,7 +85,7 @@ class DestinationController extends Controller
             }
         }
         
-        return redirect('destinationmanagement')->with('status', 'Data has been added successfully!');
+        return redirect()->route('destinations.index')->with('status', 'Data has been added successfully!');
     }
 
     /**
@@ -93,54 +94,31 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $destination)
+    public function create()
     {
-        return view('destinationForms');
+        return view('destinations.create');
     }
 
-    public function showEdit($slug)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Destination  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function show(News $news)
     {
-        $id = DB::table('destinations')
-        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
-        ->where('destinations.slug', '=', $slug)
-        ->pluck('destination_id');
-        
-        $destination = DB::table('destinations')
-        ->join('images', 'foreign_id', '=', 'destination_id')
-        ->where([
-                ['destinations.slug', '=', $slug],
-                ['images.foreign_id', '=', $id],
-            ])
-        ->first();
-
-        $image = DB::table('images')
-        ->where('foreign_id', '=', $id)
-        ->first();
-
-        $imageall = DB::table('images')
-        ->where('foreign_id', '=', $id)
-        ->get();
-        
-        $eximg = DB::table('images')
-        ->where([
-            ['image_id', '<>', $image->image_id],
-            ['foreign_id', '=', $id],
-        ])
-        ->get();
-        
-
-        return view('destinationFormsEdit', ['destination' => $destination, 'image' => $image, 'eximg' => $eximg]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Destination  $destination
+     * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
     public function edit(Destination $destination)
     {
-        //
+        return view('destinations.edit', ['destination' => $destination]);
     }
 
     /**
@@ -150,6 +128,7 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Destination $destination)
     {
         $name = DB::table('destinations')
@@ -182,7 +161,6 @@ class DestinationController extends Controller
             $name = NULL;
         }
 
-        // dd($id);
         if($file){
             $old = Image::where([
                 ['role', 'destinations'],
@@ -227,7 +205,7 @@ class DestinationController extends Controller
             }
         }
         
-        return redirect('destinationmanagement')->with('status', 'Data has been updated successfully!');
+        return redirect()->route('destinations.index')->with('status', 'Data has been updated successfully!');
     }
 
     /**
@@ -236,22 +214,24 @@ class DestinationController extends Controller
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Destination $destination)
     {
-        $id = DB::table('destinations')
-        ->leftjoin('images', 'foreign_id', '=', 'destination_id')
-        ->where('destinations.slug', '=', $slug)
-        ->pluck('destination_id');
+        Destination::destroy($destination->destination_id);
+        
+        $old = Image::where([
+            ['role', 'destinations'],
+            ['foreign_id', $destination->destination_id]
+        ])
+        ->pluck('path');
 
-        // dd($id);
-        $destination = DB::table('destinations')
-        ->where('slug', '=', $slug);
-        $destination->delete();
+        foreach($old as $old){
+            Storage::delete('public/destinations/'.$old);
+        }
 
         $image = DB::table('images')
-        ->where('foreign_id', '=', $id);
+        ->where('foreign_id', '=', $destination->destination_id);
         $image->delete();
 
-        return redirect('destinationmanagement')->with('status','Data has been removed successfully!');
+        return redirect()->route('destinations.index')->with('status','Data has been removed successfully!');
     }
 }

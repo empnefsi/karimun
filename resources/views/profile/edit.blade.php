@@ -16,12 +16,7 @@
                             <div class="card-profile-image" id="image_user" style="background-image:url('{{ asset('/storage/profile/'.auth()->user()->picture) }}');"></div>
                         </div>
                     </div>
-                    <div class="card-header text-center border-0 pt-md-4 pb-0 pb-md-4">
-                        <div id="notifDiv"
-                                style="z-index:10000; display: none; background: green; font-weight: 450; width: 350px; position: fixed; top: 80%; left: 5%; color: white; padding: 5px 20px">
-                        </div>
-                    </div>
-                    <div class="card-body pt-0 pt-md-4">
+                    <div class="card-body pt-0 pt-md-4" id="profile">
                         <form class="form-signin text-center" id="user_save_profile_form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!-- <div class="photo-row"> -->
@@ -130,23 +125,20 @@
                                     <label class="form-control-label" for="input-password-confirmation">{{ __('Confirm New Password') }}</label>
                                     <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control form-control-alternative" placeholder="{{ __('Confirm New Password') }}" value="" required>
                                 </div>
+                                <ul class="custom-ul-edit" style="font-size: 10pt; ">
+                                    <li>
+                                        Password must be at least 8 characters.
+                                    </li>
+                                    <li>
+                                        For security purpose, use combination between numbers, letters and special characters.
+                                    </li>
+                                </ul>
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Change password') }}</button>
                                 </div>
                             </div>
                         </form>
-                        <script>
-                            ! function() {
-                                "use strict";
-                                window.addEventListener("load", function() {
-                                    var e = document.getElementById("needs-validation");
-                                    e.addEventListener("submit", function(t) {
-                                        !1 === e.checkValidity() && (t.preventDefault(), t.stopPropagation()), e.classList.add("was-validated")
-                                    }, !1)
-                                }, !1)
-                            }()
-                        </script>
                     </div>
                 </div>
             </div>
@@ -157,7 +149,7 @@
 
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
-    <script src="{{asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script>
         function doAfterSelectImage(input) {
             readURL(input);

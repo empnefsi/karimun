@@ -73,7 +73,7 @@
     @error('title')
         <script>
             window.onload = () => {
-                showNotification('top', 'right', 'warning', 'News already exist!');
+                showNotification('bottom', 'right', 'warning', 'News already exist!');
             };
         </script>
     @enderror
