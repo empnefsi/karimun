@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin'],  function () {
 		Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
 		Route::post('packages-attachment-upload', [App\Http\Controllers\PackageController::class, 'attach'])->name('packages.attachment.store');
 		Route::post('packages-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('packages.gallery.store');
-		Route::delete('packages-gallery-delete/{id}', [App\Http\Controllers\GalleryController::class, 'delete'])->name('packages.gallery.delete');
+		Route::post('packages-gallery-delete', [App\Http\Controllers\GalleryController::class, 'delete'])->name('packages.gallery.delete');
 
 		Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
 		Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');

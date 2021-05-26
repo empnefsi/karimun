@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
-use App\Models\Image;
 
 class GalleryController extends Controller
 {
@@ -22,11 +22,10 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function delete($id) {
-        Image::find($id)->delete();
+    public function delete(Request $request) {
+        DB::table('images')->where('image_id', $request->id)->delete();
+        Storage::delete('public/packages/gallery/'.$request->val);
 
-        return response()->json([
-            'success' => 'Record deleted successfully!'
-        ]);
+        return response()->json('Success');
     }
 }

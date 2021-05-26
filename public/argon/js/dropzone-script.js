@@ -24,7 +24,7 @@ var Dropzones = (function () {
             previewsContainer: preview.get(0),
             previewTemplate: preview.html(),
             parallelUploads: 10,
-            maxFiles: !multiple ? 1 : null,
+            maxFiles: null,
             acceptedFiles: !multiple ? "image/*" : null,
             autoProcessQueue: true,
             init: function () {

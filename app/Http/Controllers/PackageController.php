@@ -106,6 +106,25 @@ class PackageController extends Controller
     public function update(PackageRequest $request, Package $package)
     {
         Package::find($package->package_id)->update($request->validated());
+        $cover = $request->validated()['cover'];
+        if($cover){
+            $name = $cover->getClientOriginalName();
+            $path = $cover->storeAs('public/packages/',$name);
+
+            $image = $package->images()->create([
+                'role' => 'package',
+                'path' => $name,
+            ]);
+        }
+        // dd($request->document);
+        if($request->document){
+            foreach($request->document as $document){
+                $package->images()->create([
+                    'role' => 'package',
+                    'path' => $document,
+                ]);
+            }
+        }
 
         return redirect('admin/packages')->with('status','Package was successfully updated');
     }

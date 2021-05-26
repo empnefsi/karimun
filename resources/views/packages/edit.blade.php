@@ -3,7 +3,7 @@
 @section('title', 'Edit Package')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset("assets/vendor/quill/dist/quill.core.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/quill/dist/quill.core.css') }}" type="text/css">
 @endsection
 
 @section('content')
@@ -97,7 +97,6 @@
                         </ul>
                     </div>
                     <br>
-                    <label>Current Gallery</label><br>
                     @php
                         $i=0
                     @endphp
@@ -106,49 +105,59 @@
                             $i++
                         @endphp
                     @endforeach
+                    @if($i>1)
+                        <label id="current">Current Gallery</label><br>
+                    @endif
                     @for($j=1; $j<$i; $j++)
-                    <div class="row align-items-center">
-                        <div class="col-auto">
-                            <div class="avatar">
-                                <img class="avatar-img rounded" src="{{ asset('/storage/packages/gallery/'.$package->images[$j]->path) }}" alt="...">
-                                <input type="hidden" name="document[]" value="$package->images[$j]->path">
-                            </div>
-                        </div>
-                        <div class="col ml--3">
-                            <h4 class="mb-1">{{ $package->images[$j]->path }}</h4>
-                        </div>
-                        <div class="col-auto">
-                            <div class="dropdown">
-                                <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fe fe-more-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="javascript:void(0)" onclick="remove({{$package->images[$j]->image_id}})" class="dropdown-item" id="remove">
-                                        Remove
-                                    </a>
+                    <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush" id="current{{$package->images[$j]->image_id}}">
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar">
+                                        <img class="avatar-img rounded" src="{{ asset('/storage/packages/gallery/'.$package->images[$j]->path) }}" alt="...">
+                                    </div>
                                 </div>
+                                <div class="col ml--3">
+                                    <h4 class="mb-1">{{ $package->images[$j]->path }}</h4>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fe fe-more-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="javascript:void(0)" id="{{$package->images[$j]->image_id}}" class="dropdown-item">
+                                                Remove
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $('#{{$package->images[$j]->image_id}}').on('click',function(){
+                                        var id = "{{$package->images[$j]->image_id}}";
+                                        var val = "{{$package->images[$j]->path}}";
+                                        var count = {{ $i }};
+                                        $.ajax({
+                                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                            url: "{{ route('packages.gallery.delete') }}",
+                                            type: 'POST',
+                                            data: {id: id, val: val, _token: '{{csrf_token()}}'},
+                                            success: function (data){
+                                                if(data == "Success"){
+                                                    $('#current{{$package->images[$j]->image_id}}').html('');
+                                                    count--;
+                                                    if(count==1){
+                                                        $('#current').html('');
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                     @endfor
-                    <script>
-                        function remove(id){
-                            
-                            $.ajax(
-                            {
-                                type: 'DELETE',
-                                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                                url: window.location.origin + '/admin/packages-gallery-delete/' + id,
-                                data: {
-                                    "id": id,
-                                    "_token": "{{ csrf_token() }}",
-                                },
-                                success: function (){
-                                    console.log("it Works");
-                                }
-                            });
-                        };
-                    </script>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary float-right" type="submit" id="submit">Submit</button>
@@ -178,10 +187,10 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset("assets/vendor/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
-    <script src="{{ asset("assets/vendor/bootstrap-notify/notification.js") }}"></script>
-    <script src="{{ asset("assets/vendor/quill/dist/quill.min.js") }}"></script>
-    <script src="{{ asset("assets/vendor/dropzone/dist/min/dropzone.min.js") }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-notify/notification.js') }}"></script>
+    <script src="{{ asset('assets/vendor/quill/dist/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('argon') }}/js/quill-script.js"></script>
     <script src="{{ asset('argon') }}/js/dropzone-script.js"></script>
 @endpush

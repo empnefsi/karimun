@@ -32,6 +32,7 @@
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css" rel="stylesheet">
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
         @yield('css')
+        <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -50,7 +51,6 @@
             @include('layouts.footers.guest')
         @endguest
 
-        <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         
         @stack('js')
