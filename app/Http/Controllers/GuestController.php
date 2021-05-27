@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Models\News;
-use App\Models\Package;
-use App\Models\Destination;
 
 class GuestController extends Controller
 {
