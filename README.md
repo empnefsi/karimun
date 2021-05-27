@@ -1,4 +1,4 @@
-# KARIMUN, JAWA
+# KARIMUN CMS
 
 ## Prerequisites
 
@@ -6,7 +6,7 @@
 2. XAMPP, or any local web server solution that has PHP and MySQL in it.
 3. Composer
 
-## Getting Started Sistem Infromasi EECID
+## Getting Started Karimun CMS
 
 To running Karimun on your local server, follow these steps:
 1. Clone the repo inside XAMPP htdocs (or other local web server) <br/>`git clone https://github.com/empnefsi/karimun.git`
