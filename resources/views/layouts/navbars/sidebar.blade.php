@@ -79,23 +79,23 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                    <a class="nav-link {{ $active == 'Dashboard' ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="ni ni-tv-2 {{ $active == 'Dashboard' ? 'text-primary' : 'text-default' }}"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/destinationmanagement">
-                        <i class="ni ni-bullet-list-67 text-default"></i> {{ __('Destination Management') }}
+                    <a class="nav-link {{ $active == 'Destination' ? 'active' : '' }}" href="{{ route('destinationmanagement') }}">
+                        <i class="ni ni-bullet-list-67 {{ $active == 'Destination' ? 'text-primary' : 'text-default' }}"></i> {{ __('Destination Management') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ Route('news.index') }}">
-                        <i class="ni ni-archive-2 text-default"></i> {{ __('News Management') }}
+                    <a class="nav-link {{ $active == 'News' ? 'active' : '' }}" href="{{ Route('news.index') }}">
+                        <i class="ni ni-archive-2 {{ $active == 'News' ? 'text-primary' : 'text-default' }}"></i> {{ __('News Management') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ Route('packages.index') }}">
-                        <i class="ni ni-bag-17 text-default"></i> {{ __('Package Management') }}
+                    <a class="nav-link {{ $active == 'Package' ? 'active' : '' }}" href="{{ Route('packages.index') }}">
+                        <i class="ni ni-bag-17 {{ $active == 'Package' ? 'text-primary' : 'text-default' }}"></i> {{ __('Package Management') }}
                     </a>
                 </li>
                 <!-- <li class="nav-item">

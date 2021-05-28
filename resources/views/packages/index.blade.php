@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['active' => 'Package'])
 
 @section('title', 'Package Management')
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use App\Models\Image as Images;
 
 class GalleryController extends Controller
 {
@@ -24,7 +25,7 @@ class GalleryController extends Controller
     }
 
     public function delete(Request $request) {
-        DB::table('images')->where('image_id', $request->id)->delete();
+        Images::where('image_id', $request->id)->delete();
         Storage::delete('public/packages/gallery/'.$request->val);
 
         return response()->json('Success');

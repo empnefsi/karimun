@@ -53,7 +53,7 @@ class PackageController extends Controller
      */
     public function store(PackageRequest $request)
     {
-        dd($request);
+        // dd($request);
         if($request->document){
             $packages = Package::create($request->validated());
             $cover = $request->validated()['cover'];

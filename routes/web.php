@@ -35,8 +35,8 @@ Route::group(['guest'], function(){
 Auth::routes();
 
 Route::group(['prefix' => 'admin'],  function () {
-	Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 	Route::group(['middleware' => 'auth'], function(){
+		Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 		Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 		Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 		Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
