@@ -42,18 +42,18 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="inputDescription">Description</label>
                                 <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('destinations.attachment.store') }}">
                                     {!! old('description') !!}
                                 </div>
-                                <input type="hidden" name="description" data-toggle="quill-value" required>
+                                <input type="hidden" name="description" value="{{ old('description') }}"data-toggle="quill-value" required>
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="row">
                         <div class="col-md-12">
                             <div class="form-group files">

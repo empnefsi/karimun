@@ -53,8 +53,8 @@
                                 <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('destinations.attachment.store') }}">
                                     {!! old('description') ?? $destination->description !!}
                                 </div>
-                                <input type="hidden" name="description" data-toggle="quill-value" required>
-                                <div class="invalid-feedback">*Please provide a valid description.</div>
+                                <input type="hidden" name="description" data-toggle="quill-value" required value="{{ old('description') ?? $destination->description }}">
+                                <!-- <div class="invalid-feedback">*Please provide a valid description.</div> -->
                             </div>
                         </div>
                     </div>
