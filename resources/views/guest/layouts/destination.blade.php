@@ -4,30 +4,16 @@
 <div class="container-carousel">
     <div id="carouselLandingPage" class="carousel slide carousel-page" data-ride="carousel">
         
-        {{-- <img src="{{ asset('/storage/destinations/'.$destinations->images[0]->path) }}" alt="cover" class="img-fluid" width="320px" height="100%"> --}}
-        
         <div class="carousel-inner">
             @foreach ($cover as $i => $path)
                 
-            <div class="carousel-item active">
-                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path) }}');>
+            <div class="carousel-item @if($i == 0) active @endif">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path) }}'); ">
                     <div class="layer-overlay"></div>
                 </div>
             </div>
 
             @endforeach
-
-            {{-- <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div> --}}
 
         </div>
     </div>
@@ -35,7 +21,7 @@
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
         <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Destinations <br></strong></h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find the destinations you want to visit</p>
     </div>
 
 </div>
@@ -46,19 +32,17 @@
         <div class="col-lg-12">
             <div class="row">
                 
-                @foreach ($destination as $dst)      
+                @foreach ($destinations as $dst)      
+                
                 <div class="col-md-4 ftco-animate">
                   <div class="destination">
-                      <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style=""></a>
-                      <img src="{{ asset('/storage/destinations/'.$dst->images) }}" alt="cover" class="img-fluid" width="320px" height="100%">
+                      <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$dst->images[0]->path) }}');"></a>
                       <div class="text p-3">
                           <div class="d-flex">
                               <div class="one">
                                   <h3><a href="#">{{$dst->name}}</a></h3>
                               </div>
                           </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <p class="days"><span>2 days 3 nights</span></p>
                           <hr>
                           <p class="bottom-area d-flex">
                               <span><i class="icon-map-o"></i>Location</span> 
@@ -67,19 +51,13 @@
                       </div>
                     </div>
                 </div>
+
                 @endforeach
             </div>
 
             <div class="row mt-5">
                 <div class="col text-center">
-                    {{ $destination->links() }}
-                  {{-- <div class="block-27">
-                    <ul>
-                      <li><a href="#">&lt;</a></li>
-                      <li class="active"><span>1</span></li>
-                      <li><a href="#">&gt;</a></li>
-                    </ul>
-                  </div> --}}
+                    {{ $destinations->links() }}
                 </div>
             </div>
 

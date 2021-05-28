@@ -6,23 +6,18 @@
 
         <div class="carousel-inner">
 
-            <div class="carousel-item active">
-                <div class="hero-wrap layer js-fullheight">
+          <div class="carousel-inner">
+            @foreach ($cover as $i => $path)
+                
+            <div class="carousel-item @if($i == 0) active @endif">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/news/'.$path) }}'); ">
                     <div class="layer-overlay"></div>
                 </div>
             </div>
 
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
+            @endforeach
+            {{-- @dump($path) --}}
+        </div>
 
         </div>
     </div>
@@ -42,15 +37,14 @@
         @foreach ($news as $nws)            
         <div class="col-md-3 d-flex ftco-animate">
           <div class="blog-entry align-self-stretch">
-            <a href="#" class="block-20" style="">
+            <a href="#" class="block-20" style="background-image: url('{{ asset('storage/news/'.$nws->images[0]->path) }}');">
             </a>
             <div class="text p-4 d-block">
                 <span class="tag">Updated News</span>
               <h3 class="heading mt-3">{{$nws->title}}</h3>
               <div class="meta mb-3">
                   <div>{{$nws->created_at}}</div>
-                  <div>>Admin</div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  <div><a href="#" class="meta-chat"></div>
                   <p class="bottom-area d-flex">
                     <span class="ml-auto text-center"><a href="{{ route('news') }}/{{$nws->slug}}">View</a></span>
                   </p>

@@ -27,7 +27,7 @@ Route::group(['guest'], function(){
 	
 	Route::get('/destinations/{slug}', [App\Http\Controllers\GuestController::class, 'destinationDetail'])->name('destination-detail');
 	
-	Route::get('/packages/detail', [App\Http\Controllers\GuestController::class, 'packageDetail'])->name('package-detail');
+	Route::get('/packages/{slug}', [App\Http\Controllers\GuestController::class, 'packageDetail'])->name('package-detail');
 	
 	Route::get('/news/{slug}', [App\Http\Controllers\GuestController::class, 'newsDetail'])->name('news-detail');
 });
