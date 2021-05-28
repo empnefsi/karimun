@@ -34,7 +34,7 @@ class PackageRequest extends FormRequest
     {
         $package_id = isset($this->package) ? $this->package->package_id : null;
 
-        return [
+        $rules = [
             'name' => [
                         'required',
                         'max:255',
@@ -47,7 +47,14 @@ class PackageRequest extends FormRequest
                     ],
             'description' => 'required',
             'price' => 'required|numeric',
+            'cover' => ['required', 'image'],
         ];
+
+        if (isset($this->package)) {
+            $rules['cover'] = ['image'];
+        }
+
+        return $rules;
     }
     
     /**
