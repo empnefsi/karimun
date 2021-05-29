@@ -36,10 +36,10 @@
         
         @foreach ($news as $nws)            
         <div class="col-md-3 d-flex ftco-animate">
-          <div class="blog-entry align-self-stretch">
-            <a href="#" class="block-20" style="background-image: url('{{ asset('storage/news/'.$nws->images[0]->path) }}');">
-            </a>
+          <div class="blog-entry align-self-stretch" style="border-radius: 20px">
             <div class="text p-4 d-block">
+              <a href="#" class="block-20" style="background-image: url('{{ asset('storage/news/'.$nws->images[0]->path) }}'); border-radius: 5px">
+              </a>
                 <span class="tag">Updated News</span>
               <h3 class="heading mt-3">{{$nws->title}}</h3>
               <div class="meta mb-3">
@@ -57,17 +57,7 @@
       </div>
       <div class="row mt-5">
         <div class="col text-center">
-          <div class="block-27">
-            <ul>
-              <li><a href="#">&lt;</a></li>
-              <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">&gt;</a></li>
-            </ul>
-          </div>
+          {{ $news->links() }}
         </div>
       </div>
     </div>

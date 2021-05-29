@@ -36,15 +36,16 @@
                     
                 <div class="col-md-4 ftco-animate">
                     <div class="destination">
-                      <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$pkg->images[0]->path) }}');"></a>
-                      <div class="text p-3">
+                        <div class="text p-3" style="border-radius: 20px">
+                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$pkg->images[0]->path) }}'); border-radius: 5px"></a>
                           <div class="d-flex">
                               <div class="one">
                                   <h3><a href="#">{{ $pkg->name }}</a></h3>
                               </div>
-                              <div class="two">
-                                  <span class="price per-price">{{ $pkg->price }}<br><small>/day</small></span>
-                              </div>
+                              <br>
+                              <div class="two" style="text-align: left">
+                            </div>
+                            <span class="price per-price">{{ $pkg->price }}<br><small>/day</small></span>
                           </div>
                           <hr>
                           <p class="bottom-area d-flex">

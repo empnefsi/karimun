@@ -102,7 +102,7 @@ class GuestController extends Controller
     {
         $detail = Destination::where('destinations.slug', '=', $slug)->first();
 
-        dd($detail);
+        // dd($detail);
         return view('guest.layouts.destination-detail', compact('detail'));
     }
     
@@ -111,7 +111,7 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function packageDetail()
+    public function packageDetail($slug)
     {
  
         return view('guest.layouts.package-detail');

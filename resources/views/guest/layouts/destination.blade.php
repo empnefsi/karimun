@@ -36,8 +36,8 @@
                 
                 <div class="col-md-4 ftco-animate">
                   <div class="destination">
-                      <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$dst->images[0]->path) }}');"></a>
-                      <div class="text p-3">
+                      <div class="text p-3" style="border-radius: 20px">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$dst->images[0]->path) }}'); border-radius: 5px  "></a>
                           <div class="d-flex">
                               <div class="one">
                                   <h3><a href="#">{{$dst->name}}</a></h3>
