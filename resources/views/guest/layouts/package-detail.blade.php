@@ -33,12 +33,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-                    <span>Our Best hotels &amp; Rooms</span>
-                    <h2>Luxury Hotel in Paris</h2>
+                    <h2>{{$detail->name}}</h2>
                     <p class="rate mb-5">
                         <span class="loc"><a href="#"><i class="icon-map"></i>Location</a></span>
-                  </p>
+                    </p>
                           <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                           <div class="d-md-flex mt-5 mb-5">
                               <ul>

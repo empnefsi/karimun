@@ -14,7 +14,6 @@
     </div>
 </div>
 
-
   <section class="ftco-section ftco-degree-bg">
     <div class="container">
       <div class="row">
@@ -36,13 +35,15 @@
                 </div>
                 
                 <div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-                    <h2>{{$detail->name}}</h2>
-                    <p class="rate mb-5">
-                        
-                    </p>
+                    <h1 class="text-center">{{$detail->name}}</h1>
                           {{-- <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p> --}}
-                          <div class="d-md-flex mt-5 mb-5">
-                            {{$detail->description}}
+                        <div class="text-justify">
+                          {!! $detail->description !!}
+                        </div>
+                        {{-- @php
+                          echo '<div class="text-justify" >'.$detail->description.'</div>';
+                        @endphp --}}
+                          {{-- <div class="d-md-flex mt-5 mb-5"> --}}
                               {{-- <ul>
                                   <li>The Big Oxmox advised her not to do so</li>
                                   <li>When she reached the first hills of the Italic Mountains</li>
@@ -55,8 +56,8 @@
                                   <li>Mountains, she had a last view back on the skyline</li>
                                   <li>Headline of Alphabet Village and the subline</li>
                               </ul> --}}
-                          </div>
-                    </div>
+                          {{-- </div> --}}
+                </div>
 
             </div>
         </div> <!-- .col-md-8 -->
