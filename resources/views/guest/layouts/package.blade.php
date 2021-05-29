@@ -20,8 +20,8 @@
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Packages <br></strong></h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find out our best packages for your trip</p>
+        <h1 class="mb-4 sub-title" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Packages <br></strong></h1>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" class="sub-title">Find out our best packages for your trip</p>
     </div>
 
 </div>
@@ -43,7 +43,7 @@
                                   <h3><a href="#">{{ $pkg->name }}</a></h3>
                               </div>
                               <br>
-                              <div class="two" style="text-align: left">
+                              <div class="two">
                             </div>
                             <span class="price per-price">{{ $pkg->price }}<br><small>/day</small></span>
                           </div>
