@@ -26,7 +26,7 @@ class GuestController extends Controller
         }
 
         $destinations = Destination::take(5)->orderBy('created_at', 'desc')->get();
-        $packages = Package::take(4)->orderBy('created_at', 'desc')->get();
+        $packages = Package::take(8)->orderBy('created_at', 'desc')->get();
         $news = News::take(4)->orderBy('created_at', 'desc')->get();
 
         return view('guest.index', compact('cover', 'destinations', 'packages', 'news'));

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['active' => 'News'])
 
 @section('title', 'Edit News')
 
@@ -83,5 +83,7 @@
     <script src="{{ asset("assets/vendor/bootstrap-notify/bootstrap-notify.min.js") }}"></script>
     <script src="{{ asset("assets/vendor/bootstrap-notify/notification.js") }}"></script>
     <script src="{{ asset("assets/vendor/quill/dist/quill.min.js") }}"></script>
+    <script src="{{ asset("assets/vendor/dropzone/dist/min/dropzone.min.js") }}"></script>
     <script src="{{ asset('argon') }}/js/quill-script.js"></script>
+    <script src="{{ asset('argon') }}/js/dropzone-script.js"></script>
 @endpush

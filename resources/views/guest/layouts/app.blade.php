@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
-        <title></title>
+        <title>Karimun</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no">
 
@@ -20,6 +20,8 @@
         <link href="{{ asset('guest') }}/css/jquery.timepicker.min.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/flaticon.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/icomoon.css" rel="stylesheet">
+        <link href="{{ asset('guest') }}/css/wonderful-indonesia.css" rel="stylesheet">
+        <link href="{{ asset('guest') }}/css/wonderful-indonesia-revamp.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/style.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/custom-style.css" rel="stylesheet">
     </head>
