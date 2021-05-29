@@ -25,30 +25,25 @@
 
 </div>
 
-<section class="ftco-section ftco-destination">
+<section class="destination-section my-5 py-4">
     <div class="container">
-        <div class="row justify-content-start mb-5 pb-3">
-            <div class="col-md-7 heading-section ftco-animate">
-                <span class="subheading">Featured</span>
-                <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
-            </div>
+        <div class="col-md-7 heading-section ftco-animate">
+            <h2 class="mb-4"><strong>Featured</strong> Destinations</h2>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="destination-slider owl-carousel ftco-animate">
-                    @foreach ($destinations as $destination)
-    					          <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}');"></a>
-                                <div class="text p-3">
-                                    <h3>{{ $destination->name }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+    
+        <div class="row mx-auto justify-content-start padding-125">
+            @foreach ($destinations as $destination)
+                <div class="destination-content mb-md-3 mb-xl-0 column-5">
+                    <div class="destination-item">
+                        <a href="#" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}')" class="card">
+                            <div class="overlay"></div>
+                        </a>
+                    </div>
+                    <span style="cursor : pointer;" onclick="window.location.href = '#'" class="small">{{ $destination->name }}</span>
                 </div>
-            </div>
+            @endforeach
         </div>
+
     </div>
 </section>
 
@@ -82,12 +77,12 @@
     </div>
 </section>
 
-<section class="ftco-section bg-light">
+<section class="ftco-section">
   <div class="container">
     <div class="row justify-content-start mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate">
-        <span class="subheading">Recent Blog</span>
-        <h2><strong>Tips</strong> &amp; Articles</h2>
+        <span class="subheading">The Latest from Karimun</span>
+        <h2><strong>Recent</strong> Articles</h2>
       </div>
     </div>
     <div class="row d-flex">
