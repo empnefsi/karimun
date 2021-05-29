@@ -51,6 +51,13 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        if($request->description == "<p><br></p>" 
+            || $request->description == "<h2><br></h2>" 
+            || $request->description == "<blockquote><br></blockquote>" 
+            || $request->description == null) {
+                return redirect()->back()->withInput()->with('status', 'Please fill description field!');
+        }
+
         $news = News::create($request->validated());
 
         $cover = $request->validated()['cover'];
@@ -60,7 +67,6 @@ class NewsController extends Controller
             $path = $cover->storeAs('public/news/',$name);
 
             $image = $news->images()->create([
-                'role' => 'news',
                 'path' => $name,
             ]);
         }
@@ -99,6 +105,13 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, News $news)
     {
+        if($request->description == "<p><br></p>" 
+            || $request->description == "<h2><br></h2>" 
+            || $request->description == "<blockquote><br></blockquote>" 
+            || $request->description == null) {
+                return redirect()->back()->withInput()->with('status', 'Please fill description field!');
+        }
+
         if(array_key_exists('cover', $request->validated())){
             $cover = $request->validated()['cover'];
             $ext = $cover->getClientOriginalExtension();
