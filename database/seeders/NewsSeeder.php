@@ -21,7 +21,9 @@ class NewsSeeder extends Seeder
         Storage::makeDirectory($directory);
 
         News::factory(5)
-            ->has(Image::factory(1))
+            ->has(
+                Image::factory(1)->news()
+            )
             ->create();
     }
 }

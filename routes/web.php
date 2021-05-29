@@ -35,9 +35,8 @@ Route::group(['guest'], function(){
 Auth::routes();
 
 Route::group(['prefix' => 'admin'],  function () {
-	Route::get('/', function(){ return view('welcome'); });
-	Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 	Route::group(['middleware' => 'auth'], function(){
+		Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 		Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 		Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 		Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
@@ -52,7 +51,10 @@ Route::group(['prefix' => 'admin'],  function () {
 		Route::post('news-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('news.gallery.store');
 	
 		Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
-	
+		Route::post('packages-attachment-upload', [App\Http\Controllers\PackageController::class, 'attach'])->name('packages.attachment.store');
+		Route::post('packages-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('packages.gallery.store');
+		Route::post('packages-gallery-delete', [App\Http\Controllers\GalleryController::class, 'delete'])->name('packages.gallery.delete');
+
 		Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
 		Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
 		Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
