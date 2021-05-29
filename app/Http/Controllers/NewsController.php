@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Http\Requests\NewsRequest;
 use App\Http\Traits\Attachable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -53,7 +55,8 @@ class NewsController extends Controller
 
         $cover = $request->validated()['cover'];
         if($cover){
-            $name = $cover->getClientOriginalName();
+            $ext = $cover->getClientOriginalExtension();
+            $name = Str::random(40).'.'.$ext;
             $path = $cover->storeAs('public/news/',$name);
 
             $image = $news->images()->create([
@@ -96,7 +99,20 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, News $news)
     {
-        News::find($news->news_id)->update($request->validated());
+        $cover = $request->validated()['cover'];
+        if($cover){
+            Storage::delete('public/news/'.$news->images[0]->path);
+
+            $ext = $cover->getClientOriginalExtension();
+            $name = Str::random(40).'.'.$ext;
+            $path = $cover->storeAs('public/news/',$name);
+
+            $image = $news->images()->create([
+                'path' => $name,
+            ]);
+        }
+
+        $news->update($request->validated());
         
         return redirect()->route('news.index')->with('status','News was successfully updated');
     }
@@ -109,7 +125,11 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        News::destroy($news->news_id);
+        foreach ($news->images as $index => $image) {
+            Storage::delete('public/news/'.$image->path);
+            $image->delete();
+        }
+        $news->delete();
 
         return redirect()->route('news.index')->with('status','News was successfully deleted');
     }
