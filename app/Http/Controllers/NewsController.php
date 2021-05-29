@@ -99,15 +99,15 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, News $news)
     {
-        $cover = $request->validated()['cover'];
-        if($cover){
-            Storage::delete('public/news/'.$news->images[0]->path);
-
+        if(array_key_exists('cover', $request->validated())){
+            $cover = $request->validated()['cover'];
             $ext = $cover->getClientOriginalExtension();
             $name = Str::random(40).'.'.$ext;
             $path = $cover->storeAs('public/news/',$name);
 
-            $image = $news->images()->create([
+            Storage::delete('public/news/'.$news->images[0]->path);
+
+            $image = $news->images()->update([
                 'path' => $name,
             ]);
         }
