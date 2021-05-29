@@ -35,11 +35,14 @@
                 </div>
 
                 <div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-                    <h2>{{$detail->name}}</h2>
-                    <p class="rate mb-5">
+                    <h2 class="text-center">{{$detail->name}}</h2>
+                    {{-- <p class="rate mb-5">
                         <span class="loc"><a href="#"><i class="icon-map"></i>Location</a></span>
-                    </p>
-                          <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                    </p> --}}
+                    @php
+                        echo '<div class="text-justify">'.$detail->description.'</div>';
+                    @endphp
+                          {{-- <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                           <div class="d-md-flex mt-5 mb-5">
                               <ul>
                                   <li>The Big Oxmox advised her not to do so</li>
@@ -54,7 +57,7 @@
                                   <li>Headline of Alphabet Village and the subline</li>
                               </ul>
                           </div>
-                          <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                          <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p> --}}
                     </div>
 
             </div>
