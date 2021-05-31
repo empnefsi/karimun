@@ -34,32 +34,31 @@ Route::group(['guest'], function(){
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin'],  function () {
-	Route::group(['middleware' => 'auth'], function(){
-		Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-		Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-		Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-		Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-		Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
-		Route::get('map', function () {return view('pages.maps');})->name('map');
-		Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
-		Route::get('table-list', function () {return view('pages.tables');})->name('table');
-		Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-	
-		Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
-		Route::post('news-attachment-upload', [App\Http\Controllers\NewsController::class, 'attach'])->name('news.attachment.store');
-		Route::post('news-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('news.gallery.store');
-	
-		Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
-		Route::post('packages-attachment-upload', [App\Http\Controllers\PackageController::class, 'attach'])->name('packages.attachment.store');
-		Route::post('packages-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('packages.gallery.store');
-		Route::post('packages-gallery-delete', [App\Http\Controllers\GalleryController::class, 'delete'])->name('packages.gallery.delete');
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
+	Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
-		Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
-		Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
-		Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
-		Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
-		Route::get('editdestination/{slug}', [App\Http\Controllers\DestinationController::class, 'showEdit']);
-		Route::post('/destinationFormsEdit', [App\Http\Controllers\DestinationController::class, 'update'])->name('destinationFormsEdit');
-	});
+	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
+	Route::get('map', function () {return view('pages.maps');})->name('map');
+	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
+	Route::get('table-list', function () {return view('pages.tables');})->name('table');
+
+	Route::resource('news', 'App\Http\Controllers\NewsController', ['except' => ['show']]);
+	Route::post('news-attachment-upload', [App\Http\Controllers\NewsController::class, 'attach'])->name('news.attachment.store');
+	Route::post('news-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('news.gallery.store');
+
+	Route::resource('packages', 'App\Http\Controllers\PackageController', ['except' => ['show']]);
+	Route::post('packages-attachment-upload', [App\Http\Controllers\PackageController::class, 'attach'])->name('packages.attachment.store');
+	Route::post('packages-gallery-upload', [App\Http\Controllers\GalleryController::class, 'store'])->name('packages.gallery.store');
+	Route::post('packages-gallery-delete', [App\Http\Controllers\GalleryController::class, 'delete'])->name('packages.gallery.delete');
+
+	Route::get('/destinationmanagement', 'App\Http\Controllers\DestinationController@index')->name('destinationmanagement');
+	Route::post('destinationForms', [App\Http\Controllers\DestinationController::class, 'store'])->name('destinationForms');
+	Route::get('/adddestination',[App\Http\Controllers\DestinationController::class,'show']);
+	Route::get('deletedestination/{slug}', [App\Http\Controllers\DestinationController::class,'destroy']);
+	Route::get('editdestination/{slug}', [App\Http\Controllers\DestinationController::class, 'showEdit']);
+	Route::post('/destinationFormsEdit', [App\Http\Controllers\DestinationController::class, 'update'])->name('destinationFormsEdit');
 });

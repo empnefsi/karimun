@@ -26,11 +26,9 @@
 
     <body>
         <div class="main-content">
-            @guest()
-                @include('guest.layouts.navs')
-                @yield('content')
-                @include('guest.layouts.footer')
-            @endguest
+            @include('guest.layouts.navs')
+            @yield('content')
+            @include('guest.layouts.footer')
         </div>
 
         {{-- guest JS --}}
