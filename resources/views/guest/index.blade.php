@@ -19,7 +19,7 @@
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4 sub-title" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Welcome <br></strong> to Karimun Jawa</h1>
+        <h1 class="mb-4 sub-title" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Welcome <br></strong> to Karimunjawa</h1>
         <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" class="sub-title">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
     </div>
 
@@ -62,9 +62,9 @@
                     @foreach ($packages as $package)
                         <div class="item">
                             <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$package->images[0]->path) }}');"></a>
-                                <div class="text p-3">
+                                <div class="text p-3" style="border-radius: 20px">
                                     <p class="text-center">
+                                        <a href="{{ route('packages')}}/{{$package->slug}}" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$package->images[0]->path) }}'); border-radius:20px"></a>
                                         {{ $package->name }}
                                     </p>
                                 </div>
@@ -88,8 +88,8 @@
     <div class="row d-flex">
       @foreach ($news as $news)
           <div class="col-md-3 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="{{ route('news') }}/{{ $news->slug }}" class="block-20" style="background-image: url('{{ asset('storage/news/'.$news->images[0]->path) }}')"></a>
+            <div class="blog-entry align-self-stretch" style="border-radius: 20px">
+              <a href="{{ route('news') }}/{{ $news->slug }}" class="block-20" style="background-image: url('{{ asset('storage/news/'.$news->images[0]->path) }}'); border-radius: 20px"></a>
 
               <div class="text p-4 d-block" style="cursor : pointer;" onclick="window.location.href = '{{ route('news') }}/{{ $news->slug }}'">
                 <h3 class="heading mt-3">{{ $news->title }}</h3>
