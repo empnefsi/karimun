@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
-        <title></title>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <title>Karimun</title>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-196403921-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -29,6 +28,8 @@
         <link href="{{ asset('guest') }}/css/jquery.timepicker.min.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/flaticon.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/icomoon.css" rel="stylesheet">
+        <link href="{{ asset('guest') }}/css/wonderful-indonesia.css" rel="stylesheet">
+        <link href="{{ asset('guest') }}/css/wonderful-indonesia-revamp.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/style.css" rel="stylesheet">
         <link href="{{ asset('guest') }}/css/custom-style.css" rel="stylesheet">
     </head>

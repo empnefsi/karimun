@@ -6,384 +6,101 @@
 
         <div class="carousel-inner">
 
-            <div class="carousel-item active">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
+            @foreach ($cover as $i => $path_img_cover)
+                <div class="carousel-item @if($i == 0) active @endif">
+                    <div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('storage/destinations/'.$path_img_cover) }}'); ">
+                        <div class="layer-overlay"></div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="hero-wrap layer js-fullheight">
-                    <div class="layer-overlay"></div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Welcome <br></strong> to Karimun Jawa</h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
+        <h1 class="mb-4 sub-title" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Welcome <br></strong> to Karimunjawa</h1>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" class="sub-title">Find out where to stay, what's the updated news, and travel packages in Karimun</p>
     </div>
 
 </div>
 
-<section class="ftco-section ftco-destination">
+<section class="destination-section my-5 py-4">
+    <div class="container">
+        <div class="col-md-7 heading-section ftco-animate">
+            <h2 class="mb-4"><strong>Featured</strong> Destinations</h2>
+        </div>
+    
+        <div class="row mx-auto justify-content-start padding-125">
+            @foreach ($destinations as $destination)
+                <div class="destination-content mb-md-3 mb-xl-0 column-5">
+                    <div class="destination-item">
+                        <a href="{{ route('destinations') }}/{{ $destination->slug }}" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}')" class="card">
+                            <div class="overlay"></div>
+                        </a>
+                    </div>
+                    <span style="cursor : pointer;" onclick="window.location.href = '{{ route('destinations') }}/{{ $destination->slug }}'" class="small">{{ $destination->name }}</span>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
     <div class="container">
         <div class="row justify-content-start mb-5 pb-3">
-      <div class="col-md-7 heading-section ftco-animate">
-          <span class="subheading">Featured</span>
-        <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
-      </div>
-    </div>
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Special Offers</span>
+                <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="destination-slider owl-carousel ftco-animate">
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
+                    @foreach ($packages as $package)
+                        <div class="item">
+                            <div class="destination">
+                                <div class="text p-3" style="border-radius: 20px">
+                                    <p class="text-center">
+                                        <a href="{{ route('packages')}}/{{$package->slug}}" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$package->images[0]->path) }}'); border-radius:20px"></a>
+                                        {{ $package->name }}
+                                    </p>
                                 </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">15 Listing</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">San Francisco, USA</a></h3>
-                                <span class="listing">20 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">Lodon, UK</a></h3>
-                                <span class="listing">10 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">Lion, Singapore</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">Australia</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="destination">
-                            <a href="#" class="img d-flex justify-content-center align-items-center">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <span class="listing">3 Listing</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="ftco-section bg-light">
-    <div class="container">
-            <div class="row justify-content-start mb-5 pb-3">
-      <div class="col-md-7 heading-section ftco-animate">
-          <span class="subheading">Special Offers</span>
-        <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
-      </div>
-    </div>    		
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm col-md-6 col-lg ftco-animate">
-                <div class="destination">
-                    <a href="#" class="img img-2 d-flex justify-content-center align-items-center">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search2"></span>
-                        </div>
-                    </a>
-                    <div class="text p-3">
-                        <div class="d-flex">
-                            <div class="one">
-                                <h3><a href="#">Paris, Italy</a></h3>
-                                <p class="rate">
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star"></i>
-                                    <i class="icon-star-o"></i>
-                                    <span>8 Rating</span>
-                                </p>
-                            </div>
-                            <div class="two">
-                                <span class="price">$200</span>
-                            </div>
-                        </div>
-                        <p>Far far away, behind the word mountains, far from the countries</p>
-                        <p class="days"><span>2 days 3 nights</span></p>
-                        <hr>
-                        <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> San Franciso, CA</span> 
-                            <span class="ml-auto"><a href="#">Discover</a></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="ftco-section bg-light">
+<section class="ftco-section">
   <div class="container">
     <div class="row justify-content-start mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate">
-        <span class="subheading">Recent Blog</span>
-        <h2><strong>Tips</strong> &amp; Articles</h2>
+        <span class="subheading">The Latest from Karimun</span>
+        <h2><strong>Recent</strong> Articles</h2>
       </div>
     </div>
     <div class="row d-flex">
-      <div class="col-md-3 d-flex ftco-animate">
-        <div class="blog-entry align-self-stretch">
-          <a href="blog-single.html" class="block-20">
-          </a>
-          <div class="text p-4 d-block">
-              <span class="tag">Tips, Travel</span>
-            <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
-            <div class="meta mb-3">
-              <div><a href="#">August 12, 2018</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+      @foreach ($news as $news)
+          <div class="col-md-3 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch" style="border-radius: 20px">
+              <a href="{{ route('news') }}/{{ $news->slug }}" class="block-20" style="background-image: url('{{ asset('storage/news/'.$news->images[0]->path) }}'); border-radius: 20px"></a>
+
+              <div class="text p-4 d-block" style="cursor : pointer;" onclick="window.location.href = '{{ route('news') }}/{{ $news->slug }}'">
+                <h3 class="heading mt-3">{{ $news->title }}</h3>
+                <div class="meta mb-3">
+                    {{ date('j M Y', strtotime($news->created_at))}}
+                </div>
+              </div>
+
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-3 d-flex ftco-animate">
-        <div class="blog-entry align-self-stretch">
-          <a href="blog-single.html" class="block-20">
-          </a>
-          <div class="text p-4">
-              <span class="tag">Culture</span>
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-            <div class="meta mb-3">
-              <div><a href="#">August 12, 2018</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 d-flex ftco-animate">
-        <div class="blog-entry align-self-stretch">
-          <a href="blog-single.html" class="block-20">
-          </a>
-          <div class="text p-4">
-              <span class="tag">Tips, Travel</span>
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-            <div class="meta mb-3">
-              <div><a href="#">August 12, 2018</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 d-flex ftco-animate">
-        <div class="blog-entry align-self-stretch">
-          <a href="blog-single.html" class="block-20">
-          </a>
-          <div class="text p-4">
-              <span class="tag">Tips, Travel</span>
-            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-            <div class="meta mb-3">
-              <div><a href="#">August 12, 2018</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
