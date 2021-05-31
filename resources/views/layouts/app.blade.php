@@ -32,6 +32,7 @@
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css" rel="stylesheet">
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
         @yield('css')
+        <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     </head>
     <body class="{{ $class ?? '' }} @yield('class')">
         @auth()
@@ -50,7 +51,6 @@
            
         @endguest
 
-        <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         
         @stack('js')
@@ -72,7 +72,5 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-
-        
     </body>
 </html>

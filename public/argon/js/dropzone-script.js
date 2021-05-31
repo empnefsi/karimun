@@ -16,13 +16,28 @@ var Dropzones = (function () {
             headers: {
                 "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content"),
             },
+            success: function (response) {
+                fileName = JSON.parse(response.xhr.response)['fileName'];
+                $('form').append('<input type="hidden" name="document[]" value="' + fileName + '">')
+            },
+            removedfile: function (file) {
+                file.previewElement.remove()
+                var name = ''
+                if (typeof file.file_name !== 'undefined') {
+                  name = file.file_name
+                } else {
+                  name = uploadedDocumentMap[file.name]
+                }
+                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+            },
             thumbnailWidth: null,
             thumbnailHeight: null,
             previewsContainer: preview.get(0),
             previewTemplate: preview.html(),
+            parallelUploads: 10,
             maxFiles: !multiple ? 1 : null,
             acceptedFiles: !multiple ? "image/*" : null,
-            autoProcessQueue: false,
+            autoProcessQueue: true,
             init: function () {
                 this.on("addedfile", function (file) {
                     if (!multiple && currentFile) {
@@ -30,14 +45,6 @@ var Dropzones = (function () {
                     }
                     currentFile = file;
                 });
-
-                var myDropzone = this;
-                
-                // Update selector to match your button
-                $("#submit").click(function (e) {
-                    myDropzone.processQueue();
-                });
-                
             },
         };
 

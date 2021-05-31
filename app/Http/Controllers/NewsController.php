@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Http\Requests\NewsRequest;
 use App\Http\Traits\Attachable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -49,15 +51,22 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        if($request->description == "<p><br></p>" 
+            || $request->description == "<h2><br></h2>" 
+            || $request->description == "<blockquote><br></blockquote>" 
+            || $request->description == null) {
+                return redirect()->back()->withInput()->with('status', 'Please fill description field!');
+        }
+
         $news = News::create($request->validated());
 
         $cover = $request->validated()['cover'];
         if($cover){
-            $name = $cover->getClientOriginalName();
+            $ext = $cover->getClientOriginalExtension();
+            $name = Str::random(40).'.'.$ext;
             $path = $cover->storeAs('public/news/',$name);
 
             $image = $news->images()->create([
-                'role' => 'news',
                 'path' => $name,
             ]);
         }
@@ -96,7 +105,27 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, News $news)
     {
-        News::find($news->news_id)->update($request->validated());
+        if($request->description == "<p><br></p>" 
+            || $request->description == "<h2><br></h2>" 
+            || $request->description == "<blockquote><br></blockquote>" 
+            || $request->description == null) {
+                return redirect()->back()->withInput()->with('status', 'Please fill description field!');
+        }
+
+        if(array_key_exists('cover', $request->validated())){
+            $cover = $request->validated()['cover'];
+            $ext = $cover->getClientOriginalExtension();
+            $name = Str::random(40).'.'.$ext;
+            $path = $cover->storeAs('public/news/',$name);
+
+            Storage::delete('public/news/'.$news->images[0]->path);
+
+            $image = $news->images()->update([
+                'path' => $name,
+            ]);
+        }
+
+        $news->update($request->validated());
         
         return redirect()->route('news.index')->with('status','News was successfully updated');
     }
@@ -109,7 +138,11 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        News::destroy($news->news_id);
+        foreach ($news->images as $index => $image) {
+            Storage::delete('public/news/'.$image->path);
+            $image->delete();
+        }
+        $news->delete();
 
         return redirect()->route('news.index')->with('status','News was successfully deleted');
     }
