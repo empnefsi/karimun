@@ -66,7 +66,7 @@
                                 </div>
                             </td>
                             <td class="text-center align-middle">
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
+                                <a href="{{ route('destination-detail', ['slug' => $destinations[$i][1]]) }}" class="btn btn-primary btn-sm"><i class="fas fa-info pl-1 pr-1"></i></a>
                                 <a href="{{ route('destinations.edit', ['destination' => $destinations[$i][1]]) }}" class="btn btn-warning btn-sm "><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ Route('destinations.destroy', ['destination' => $destinations[$i][1]]) }}" method="POST" class="d-inline">
                                     @csrf
