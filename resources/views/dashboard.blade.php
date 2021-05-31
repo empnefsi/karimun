@@ -112,8 +112,8 @@
                             </div>
                             <!-- <div class="col text-right">
                                 <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                            </div>
-                        </div> -->
+                            </div> -->
+                        </div>
                     </div>
                     <div class="chart">
                         <canvas id="chart-users" class="chart-canvas"></canvas>
