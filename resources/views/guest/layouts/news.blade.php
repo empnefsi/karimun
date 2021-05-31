@@ -24,8 +24,8 @@
     <!-- end div carousel page -->
 
     <div class="col-md-9 ftco-animate carousel-title" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>News<br></strong></h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" id="descTitleLandingPage">Updated News About Karimun Jawa</p>
+        <h1 class="mb-4 sub-title" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>News<br></strong></h1>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" class="sub-title">Updated News About Karimun Jawa</p>
     </div>
 
 </div>
@@ -38,13 +38,15 @@
         <div class="col-md-3 d-flex ftco-animate">
           <div class="blog-entry align-self-stretch" style="border-radius: 20px">
             <div class="text p-4 d-block">
-              <a href="#" class="block-20" style="background-image: url('{{ asset('storage/news/'.$nws->images[0]->path) }}'); border-radius: 5px">
+              <a href="{{ route('news') }}/{{ $nws->slug }}" class="block-20" style="background-image: url('{{ asset('storage/news/'.$nws->images[0]->path) }}'); border-radius: 5px"></a>
+              <a href="{{ route('news') }}/{{ $nws->slug }}">
+                <h3 class="heading mt-3">{{$nws->title}}</h3>
               </a>
-                <span class="tag">Updated News</span>
-              <h3 class="heading mt-3">{{$nws->title}}</h3>
               <div class="meta mb-3">
+                <a href="{{ route('news') }}/{{ $nws->slug }}">
                   <div>{{$nws->created_at}}</div>
-                  <div><a href="#" class="meta-chat"></div>
+                </a>
+                  <div><a href="{{ route('news') }}/{{ $nws->slug }}" class="meta-chat"></div>
                   <p class="bottom-area d-flex">
                     <span class="ml-auto text-center"><a href="{{ route('news') }}/{{$nws->slug}}">View</a></span>
                   </p>

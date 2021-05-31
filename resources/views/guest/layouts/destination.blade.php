@@ -37,15 +37,11 @@
                 <div class="col-md-4 ftco-animate">
                   <div class="destination">
                       <div class="text p-3" style="border-radius: 20px">
-                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$dst->images[0]->path) }}'); border-radius: 5px  "></a>
-                          <div class="d-flex">
-                              <div class="one">
-                                  <h3><a href="#">{{$dst->name}}</a></h3>
-                              </div>
-                          </div>
-                          <hr>
+                        <a href="{{ route('destinations') }}/{{ $dst->slug }}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/destinations/'.$dst->images[0]->path) }}'); border-radius: 5px  "></a>
+                            <h3 class="text-center">
+                                <a href="{{ route('destinations') }}/{{ $dst->slug }}">{{$dst->name}}</a>
+                            </h3>
                           <p class="bottom-area d-flex">
-                              <span><i class="icon-map-o"></i>Location</span> 
                               <span class="ml-auto"><a href="{{ route('destinations') }}/{{ $dst->slug }}">View</a></span>
                           </p>
                       </div>

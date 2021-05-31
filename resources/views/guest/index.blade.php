@@ -35,11 +35,11 @@
             @foreach ($destinations as $destination)
                 <div class="destination-content mb-md-3 mb-xl-0 column-5">
                     <div class="destination-item">
-                        <a href="#" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}')" class="card">
+                        <a href="{{ route('destinations') }}/{{ $destination->slug }}" style="background-image: url('{{ asset('storage/destinations/'.$destination->images[0]->path) }}')" class="card">
                             <div class="overlay"></div>
                         </a>
                     </div>
-                    <span style="cursor : pointer;" onclick="window.location.href = '#'" class="small">{{ $destination->name }}</span>
+                    <span style="cursor : pointer;" onclick="window.location.href = '{{ route('destinations') }}/{{ $destination->slug }}'" class="small">{{ $destination->name }}</span>
                 </div>
             @endforeach
         </div>
@@ -64,9 +64,9 @@
                             <div class="destination">
                                 <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$package->images[0]->path) }}');"></a>
                                 <div class="text p-3">
-                                    <div class="one">
+                                    <p class="text-center">
                                         {{ $package->name }}
-                                    </div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +89,15 @@
       @foreach ($news as $news)
           <div class="col-md-3 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('{{ asset('storage/news/'.$news->images[0]->path) }}')"></a>
-              <div class="text p-4 d-block">
-                <h3 class="heading mt-3"><a href="#">{{ $news->title }}</a></h3>
+              <a href="{{ route('news') }}/{{ $news->slug }}" class="block-20" style="background-image: url('{{ asset('storage/news/'.$news->images[0]->path) }}')"></a>
+
+              <div class="text p-4 d-block" style="cursor : pointer;" onclick="window.location.href = '{{ route('news') }}/{{ $news->slug }}'">
+                <h3 class="heading mt-3">{{ $news->title }}</h3>
                 <div class="meta mb-3">
-                  <div><a href="#">{{ date('j M Y', strtotime($news->created_at))}}</a></div>
+                    {{ date('j M Y', strtotime($news->created_at))}}
                 </div>
               </div>
+
             </div>
           </div>
       @endforeach

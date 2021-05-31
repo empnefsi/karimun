@@ -37,19 +37,15 @@
                 <div class="col-md-4 ftco-animate">
                     <div class="destination">
                         <div class="text p-3" style="border-radius: 20px">
-                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$pkg->images[0]->path) }}'); border-radius: 5px"></a>
+                            <a href="{{ route('packages') }}/{{ $pkg->slug }}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$pkg->images[0]->path) }}'); border-radius: 5px"></a>
                           <div class="d-flex">
-                              <div class="one">
-                                  <h3><a href="#">{{ $pkg->name }}</a></h3>
-                              </div>
+                            <h3><a href="{{ route('packages') }}/{{ $pkg->slug }}">{{ $pkg->name }}</a></h3>
                               <br>
-                              <div class="two">
-                            </div>
+                            <div class="two"></div>
                             <span class="price per-price">{{ $pkg->price }}<br><small>/day</small></span>
                           </div>
                           <hr>
                           <p class="bottom-area d-flex">
-                              <span><i class="icon-map-o"></i> San Franciso, CA</span> 
                               <span class="ml-auto"><a href="{{ route('packages') }}/{{ $pkg->slug }}">View</a></span>
                           </p>
                       </div>
