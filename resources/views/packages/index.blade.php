@@ -47,7 +47,7 @@
                             <td class="text-center align-middle">{{ strip_tags(\Illuminate\Support\Str::limit($packages->description ,75)) }}</td>
                             <td class="text-center align-middle">{{ number_format($packages->price, 0) }}</td>
                             <td class="text-center align-middle">
-                                <a href="#" class="btn btn-primary btn-sm ">
+                                <a href="{{ route('package-detail', ['slug' => $packages->slug]) }}" target="_blank" class="btn btn-primary btn-sm ">
                                     <i class="fas fa-info pl-1 pr-1"></i>
                                 </a>
                                 <a href="{{ route('packages.edit', ['package' => $packages->slug]) }}" class="btn btn-warning btn-sm ">
