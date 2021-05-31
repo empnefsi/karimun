@@ -43,7 +43,7 @@
                             <td class="text-center align-middle">{{ $news->title }}</td>
                             <td class="text-center align-middle">{{ strip_tags(\Illuminate\Support\Str::limit($news->description ,75)) }}</td>
                             <td class="text-center align-middle">
-                                <a href="#" class="btn btn-primary btn-sm ">
+                                <a href="{{ route('news-detail', ['slug' => $news->slug]) }}" target="_blank" class="btn btn-primary btn-sm ">
                                     <i class="fas fa-info pl-1 pr-1"></i>
                                 </a>
                                 <a href="{{ route('news.edit', ['news' => $news->slug]) }}" class="btn btn-warning btn-sm ">
