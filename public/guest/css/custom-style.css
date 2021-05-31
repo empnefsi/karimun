@@ -32,6 +32,15 @@
 }
 
 div.carousel-title > h1.sub-title,
-p.sub-title {
+q p.sub-title {
     color: white;
+}
+
+blockquote {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-right: 0;
+    padding-left: 15px;
+    border-left: 3px solid #ccc;
 }
