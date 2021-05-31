@@ -58,17 +58,113 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group files">
-                                <label for="inputGallery">Gallery</label>
-                                <input type="file" name="file2[]" id="inputGallery" class="form-control rounded" accept="image/*" multiple>
-                            </div>
-                            <div class="mb-4">
-                                <p>Current Gallery</p>
+                    <label>Gallery</label><br>
+                    <div class="dropzone dropzone-multiple" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="{{ Route('destinations.gallery.store') }}">
+                        <div class="fallback">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="dropzoneMultipleUpload" multiple>
+                                <label class="custom-file-label" for="dropzoneMultipleUpload">Choose file</label>
                             </div>
                         </div>
-                    </div> -->
+                        <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
+                            <li class="list-group-item px-0">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <div class="avatar">
+                                            <img class="avatar-img rounded" src="#" alt="..." data-dz-thumbnail>
+                                        </div>
+                                    </div>
+                                    <div class="col ml--3">
+                                        <h4 class="mb-1" data-dz-name>...</h4>
+                                        <p class="small text-muted mb-0" data-dz-size>...</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fe fe-more-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item" data-dz-remove>
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
+                    @php
+                        $i=0
+                    @endphp
+                    @foreach($destination->images as $images)
+                        @php
+                            $i++
+                        @endphp
+                    @endforeach
+                    @if($i>1)
+                        <label id="current">Current Gallery</label><br>
+                    @endif
+                    <script>
+                        var count = {{ $i-1 }};
+                    </script>
+                    @for($j=1; $j<$i; $j++)
+                    <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush" id="current{{$destination->images[$j]->image_id}}">
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar">
+                                        <img class="avatar-img rounded" src="{{ asset('/storage/destinations/gallery/'.$destination->images[$j]->path) }}" alt="...">
+                                    </div>
+                                </div>
+                                <div class="col ml--3">
+                                    <h4 class="mb-1">{{ $destination->images[$j]->path }}</h4>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fe fe-more-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="javascript:void(0)" id="{{$destination->images[$j]->image_id}}" class="dropdown-item">
+                                                Remove
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $('#{{$destination->images[$j]->image_id}}').on('click',function(){
+                                        var accept = confirm("Are you sure to delete this picture?");
+                                        if(accept){
+                                            var id = "{{$destination->images[$j]->image_id}}";
+                                            var val = "{{$destination->images[$j]->path}}";
+                                            $.ajax({
+                                                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                                url: "{{ route('destinations.gallery.delete') }}",
+                                                type: 'POST',
+                                                data: {
+                                                    id: id, 
+                                                    val: val, 
+                                                    _token: '{{csrf_token()}}'
+                                                },
+                                                success: function (data){
+                                                    if(data == "Success"){
+                                                        $('#current{{$destination->images[$j]->image_id}}').html('');
+                                                        count--;
+                                                        if(count==0){
+                                                            $('#current').html('');
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </li>
+                    </ul>
+                    @endfor
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary float-right" type="submit" id="submit">Submit</button>

@@ -58,5 +58,7 @@ Route::group(['prefix' => 'admin'],  function () {
 		
 		Route::resource('destinations', 'App\Http\Controllers\DestinationController', ['except' => ['show']]);
 		Route::post('destinations-attachment-upload', [App\Http\Controllers\DestinationController::class, 'attach'])->name('destinations.attachment.store');
+		Route::post('destinations-gallery-upload', [App\Http\Controllers\GalleryController::class, 'storedes'])->name('destinations.gallery.store');
+		Route::post('destinations-gallery-delete', [App\Http\Controllers\GalleryController::class, 'deletedes'])->name('destinations.gallery.delete');
 	});
 });
