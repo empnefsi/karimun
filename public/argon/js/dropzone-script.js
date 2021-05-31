@@ -17,7 +17,8 @@ var Dropzones = (function () {
                 "X-CSRF-TOKEN": $("meta[name=csrf-token]").attr("content"),
             },
             success: function (response) {
-                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                fileName = JSON.parse(response.xhr.response)['fileName'];
+                $('form').append('<input type="hidden" name="document[]" value="' + fileName + '">')
             },
             removedfile: function (file) {
                 file.previewElement.remove()
