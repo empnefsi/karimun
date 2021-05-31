@@ -1,16 +1,21 @@
 @extends('layouts.app', ['class' => 'bg-default'])
 
+@section('title', 'Reset Password')
+
+@section('class', 'backauth')
+
 @section('content')
     @include('layouts.headers.guest')
     
-    <div class="container mt--8 pb-5">
+    <div class="container pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary shadow border-0">
+                <div class="card bg-secondary shadow border-0 mt-8">
+                    <div class="card-header bg-transparent text-center">
+                        <h3>Reset Password</h3>
+                    </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
-                            <small>{{ __('Reset Password') }}</small>
-                        </div>
+                        
                         <form role="form" method="POST" action="{{ route('password.update') }}">
                             @csrf
 
@@ -50,6 +55,14 @@
                                     <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required>
                                 </div>
                             </div>
+                            <ul class="custom-ul-reset" style="font-size: 10pt; ">
+                                <li>
+                                    Password must be at least 8 characters.
+                                </li>
+                                <li>
+                                    For security purpose, use combination between numbers, letters and special characters.
+                                </li>
+                            </ul>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Reset Password') }}</button>
                             </div>

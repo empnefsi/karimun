@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+<!-- <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
     <div class="container px-4">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('argon') }}/img/brand/white.png" />
@@ -6,9 +6,9 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+        <div class="collapse navbar-collapse" id="navbar-collapse-main"> -->
             <!-- Collapse header -->
-            <div class="navbar-collapse-header d-md-none">
+            <!-- <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
@@ -22,9 +22,9 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Navbar items -->
-            <ul class="navbar-nav ml-auto">
+            <!-- <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('home') }}">
                         <i class="ni ni-planet"></i>
@@ -52,4 +52,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->

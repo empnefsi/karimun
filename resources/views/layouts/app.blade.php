@@ -34,7 +34,7 @@
         @yield('css')
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     </head>
-    <body class="{{ $class ?? '' }}">
+    <body class="{{ $class ?? '' }} @yield('class')">
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -48,7 +48,7 @@
         </div>
 
         @guest()
-            @include('layouts.footers.guest')
+           
         @endguest
 
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

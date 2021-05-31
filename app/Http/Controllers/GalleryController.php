@@ -34,4 +34,27 @@ class GalleryController extends Controller
 
         return response()->json('Success');
     }
+
+    public function storedes(Request $request) {
+        $ext = $request['file']->getClientOriginalExtension();
+        $name = Str::random(40).'.'.$ext;
+
+        $img = Image::make($request['file']->getRealPath())->encode('jpg', 0)->orientate();
+        $img->stream();
+
+        Storage::disk('local')->put("public/destinations/gallery/" . $name, $img, 'public');
+        
+        $path = "storage/destinations/gallery/{$name}";
+
+        return response()->json([
+            "fileName" => $name,
+        ]);
+    }
+
+    public function deletedes(Request $request) {
+        Images::where('image_id', $request->id)->delete();
+        Storage::delete('public/destinations/gallery/'.$request->val);
+
+        return response()->json('Success');
+    }
 }
