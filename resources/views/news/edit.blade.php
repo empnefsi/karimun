@@ -46,7 +46,7 @@
                                 <div data-toggle="quill" data-quill-placeholder="Description" data-image-url="{{ Route('news.attachment.store') }}">
                                     {!! old('description') ?? $news->description !!}
                                 </div>
-                                <input type="hidden" name="description" data-toggle="quill-value" required>
+                                <input type="hidden" name="description" data-toggle="quill-value" required value="{!! old('description') ?? $news->description !!}">
                                 <div class="invalid-feedback">*Please provide a valid description.</div>
                             </div>
                         </div>
@@ -57,26 +57,8 @@
                 </div>
             </div>
         </form>
-        <script>
-            ! function() {
-                "use strict";
-                window.addEventListener("load", function() {
-                    var e = document.getElementById("needs-validation");
-                    e.addEventListener("submit", function(t) {
-                        !1 === e.checkValidity() && (t.preventDefault(), t.stopPropagation()), e.classList.add("was-validated")
-                    }, !1)
-                }, !1)
-            }()
-        </script>
         @include('layouts.footers.auth')
     </div>
-    @error('title')
-        <script>
-            window.onload = () => {
-                showNotification('top', 'right', 'warning', 'News already exist!');
-            };
-        </script>
-    @enderror
 @endsection
 
 @push('scripts')
@@ -86,4 +68,32 @@
     <script src="{{ asset("assets/vendor/dropzone/dist/min/dropzone.min.js") }}"></script>
     <script src="{{ asset('argon') }}/js/quill-script.js"></script>
     <script src="{{ asset('argon') }}/js/dropzone-script.js"></script>
+
+    <script>
+        ! function() {
+            "use strict";
+            window.addEventListener("load", function() {
+                var e = document.getElementById("needs-validation");
+                e.addEventListener("submit", function(t) {
+                    !1 === e.checkValidity() && (t.preventDefault(), t.stopPropagation()), e.classList.add("was-validated")
+                }, !1)
+            }, !1)
+        }()
+    </script>
+
+    @error('title')
+        <script>
+            window.onload = () => {
+                showNotification('bottom', 'right', 'warning', 'News already exist!');
+            };
+        </script>
+    @enderror
+
+    @if(session('status'))
+        <script>
+            window.onload = () => {
+                showNotification('bottom', 'right', 'warning', '<?php echo session('status') ?>');
+            };
+        </script>
+    @endif
 @endpush
