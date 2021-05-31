@@ -55,7 +55,6 @@ class DestinationController extends Controller
         }
 
         $file2 = $request->document;
-        // dd($request);
         if($file2){
             $destination = Destination::create([
                 'name' => $request->inputName,
@@ -71,7 +70,7 @@ class DestinationController extends Controller
                 $path = $file->storeAs('public/destinations/',$name);
 
                 $image = $destination->images()->create([
-                    'role' => 'destinations',
+                    'role' => 'destination',
                     'path' => $name,
                 ]);
             }
@@ -81,7 +80,7 @@ class DestinationController extends Controller
 
             foreach($file2 as $file2){
                 $image = $destination->images()->create([
-                    'role' => 'destinations',
+                    'role' => 'destination',
                     'path' => $file2,
                 ]);
             }
@@ -153,7 +152,7 @@ class DestinationController extends Controller
 
         $file = $request->file('file');
         if($file){
-            $destination = DB::table('destinations')
+            DB::table('destinations')
             ->where('destination_id', '=', $destination->destination_id)
             ->update(
                 ['name' => $request->inputName,
@@ -162,13 +161,13 @@ class DestinationController extends Controller
                 'coordinate' => $request->inputLocation,
                 ]
             );
-            $cover = $request->validated()['file'];
+            $cover = $request->file;
             if($cover){
                 $name = $file->getClientOriginalName();
                 $path = $file->storeAs('public/destinations/',$name);
 
                 $old = Image::where([
-                    ['role', 'destinations'],
+                    ['role', 'destination'],
                     ['foreign_id', $destination->destination_id]
                 ])
                 ->first();
@@ -176,13 +175,12 @@ class DestinationController extends Controller
 
                 $image = DB::table('images')
                 ->where('foreign_id', $destination->destination_id)
-                ->where('role', 'destinations')
+                ->where('role', 'destination')
+                ->limit(1)
                 ->update([
-                    [
-                        'role' => 'destinations',
-                        'path' => $name,
-                    ]
-                ]);     
+                    'role' => 'destination',
+                    'path' => $name,
+                ]);
             }
             else{
                 $name = NULL;
@@ -194,10 +192,13 @@ class DestinationController extends Controller
             foreach($file2 as $file2){
                 $image2 = new Image;
                 $image2->foreign_id = $destination->destination_id;
-                $image2->role = 'destinations';
+                $image2->role = 'destination';
                 $image2->path = $file2;
                 $image2->save();
             }
+        }
+        else{
+            return back()->with('status', 'Gallery must not be empty');
         }
         
         return redirect()->route('destinations.index')->with('status', 'Destination was successfully updated!');
