@@ -18,33 +18,34 @@
     <div class="container">
       <div class="row">
 
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-md-12 ftco-animate">
-                    <div class="single-slider owl-carousel">
-                        <div class="item">
-                            <div class="hotel-img" style=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="hotel-img" style=""></div>
-                        </div>
-                        <div class="item">
-                            <div class="hotel-img" style=""></div>
-                        </div>
-                    </div>
+        <div class="col-md-12 ftco-animate">
+            <div class="single-slider owl-carousel">
+                <div class="item">
+                    <div class="hotel-img" style=""></div>
                 </div>
-                
-                <div class="col-md-12 mt-4 mb-5 ftco-animate">
-                    <h1 class="text-center">{{$detail->name}}</h1>
-                        <div class="text-justify">
-                          {!! $detail->description !!}
-                        </div>
+                <div class="item">
+                    <div class="hotel-img" style=""></div>
                 </div>
-
+                <div class="item">
+                    <div class="hotel-img" style=""></div>
+                </div>
             </div>
-        </div> <!-- .col-md-8 -->
+        </div>
+        
+        <div class="col-md-12 mt-4 mb-5 ftco-animate">
+          <h1 class="text-center">{{$detail->name}}</h1>
+          <div class="text-justify">
+            {!! $detail->description !!}
+          </div>
+        </div>
+
+        <div class="mx-auto">
+          {!! $detail->coordinate !!}
+
+        </div>
+
       </div>
-    </div>
+    </div> <!-- .col-md-8 -->
   </section> <!-- .section -->
 
 <!-- loader -->

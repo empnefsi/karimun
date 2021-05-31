@@ -124,10 +124,10 @@ class GuestController extends Controller
      */
     public function newsDetail($slug)
     {   
-        $news = News::where('news.slug', '=', $slug)->first();
+        $detail = News::where('news.slug', '=', $slug)->first();
 
         // dd($news);
         
-        return view('guest.layouts.news-detail', compact('news'));
+        return view('guest.layouts.news-detail', compact('detail'));
     }
 }
