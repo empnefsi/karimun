@@ -5,16 +5,25 @@
     <div id="carouselLandingPage" class="carousel slide carousel-page" data-ride="carousel">
         
         <div class="carousel-inner">
-            @foreach ($cover as $i => $path)
+            {{-- @foreach ($cover as $i => $path) --}}
                 
-            <div class="carousel-item @if($i == 0) active @endif">
-                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/packages/'.$path) }}'); ">
+            <div class="carousel-item active">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/packages/photo-1.jpeg') }}'); ">
+                    <div class="layer-overlay"></div>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/packages/photo-2.jpeg') }}'); ">
+                    <div class="layer-overlay"></div>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/packages/photo-3.jpeg') }}'); ">
                     <div class="layer-overlay"></div>
                 </div>
             </div>
 
-            @endforeach
-            {{-- @dump($path) --}}
+            {{-- @endforeach --}}
         </div>
     </div>
     <!-- end div carousel page -->
@@ -40,8 +49,6 @@
                             <a href="{{ route('packages') }}/{{ $pkg->slug }}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('storage/packages/'.$pkg->images[0]->path) }}'); border-radius: 5px"></a>
                           <div class="d-flex">
                             <h3><a href="{{ route('packages') }}/{{ $pkg->slug }}">{{ $pkg->name }}</a></h3>
-                              <br>
-                            <div class="two"></div>
                             <span class="price per-price">{{ $pkg->price }}<br><small>/day</small></span>
                           </div>
                           <hr>

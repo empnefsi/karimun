@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-<div class="hero-wrap js-fullheight" style="background-image: url('../images/bg_4.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/news/photo-2.jpeg') }}');">
     <div class="overlay"></div>
     <div class="container">
       <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -18,7 +18,7 @@
       <div class="row">
 
         <div class="col-md-12 mt-4 mb-5 ftco-animate">
-          <h2 class="text-center">{{$detail->name}}</h2>
+          <h2 class="text-center">{{$detail->title}}</h2>
           <div class="text-justify">
             {!! $detail->description !!}
           </div>

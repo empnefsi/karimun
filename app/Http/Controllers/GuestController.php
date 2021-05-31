@@ -19,17 +19,17 @@ class GuestController extends Controller
     public function index()
     {
         $carousel_sum = 3;
-        $destination_cover = Destination::take($carousel_sum)->orderBy('created_at', 'desc')->get();
-        $cover = array();
-        for($i = 0; $i < $carousel_sum; $i++){
-            array_push($cover, $destination_cover[$i]->images[0]->path);
-        }
+        // $destination_cover = Destination::take($carousel_sum)->orderBy('created_at', 'desc')->get();
+        // $cover = array();
+        // for($i = 0; $i < $carousel_sum; $i++){
+        //     array_push($cover, $destination_cover[$i]->images[0]->path);
+        // }
 
         $destinations = Destination::take(5)->orderBy('created_at', 'desc')->get();
         $packages = Package::take(8)->orderBy('created_at', 'desc')->get();
         $news = News::take(4)->orderBy('created_at', 'desc')->get();
 
-        return view('guest.index', compact('cover', 'destinations', 'packages', 'news'));
+        return view('guest.index', compact('destinations', 'packages', 'news'));
     }
 
     /**

@@ -7,16 +7,25 @@
         <div class="carousel-inner">
 
           <div class="carousel-inner">
-            @foreach ($cover as $i => $path)
+            {{-- @foreach ($cover as $i => $path) --}}
                 
-            <div class="carousel-item @if($i == 0) active @endif">
-                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('storage/news/'.$path) }}'); ">
+            <div class="carousel-item active">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-3.jpeg') }}');">
+                    <div class="layer-overlay"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-2.jpeg') }}');">
+                    <div class="layer-overlay"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-wrap layer js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-1.jpeg') }}');">
                     <div class="layer-overlay"></div>
                 </div>
             </div>
 
-            @endforeach
-            {{-- @dump($path) --}}
+            {{-- @endforeach --}}
         </div>
 
         </div>

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="hero-wrap js-fullheight" style="">
+<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-1.jpeg') }}');">
     <div class="overlay"></div>
     <div class="container">
       <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -21,13 +21,13 @@
         <div class="col-md-12 ftco-animate">
             <div class="single-slider owl-carousel">
                 <div class="item">
-                    <div class="hotel-img" style=""></div>
+                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-2.jpeg') }}');"></div>
                 </div>
                 <div class="item">
-                    <div class="hotel-img" style=""></div>
+                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-3.jpeg') }}');"></div>
                 </div>
                 <div class="item">
-                    <div class="hotel-img" style=""></div>
+                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-1.jpeg') }}');"></div>
                 </div>
             </div>
         </div>
