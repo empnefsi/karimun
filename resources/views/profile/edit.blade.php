@@ -1,4 +1,6 @@
-@extends('layouts.app', ['title' => __('User Profile')])
+@extends('layouts.app', ['title' => __('User Profile'), 'active' => 'Dashboard'])
+
+@section('title', 'User Profile')
 
 @section('content')
     @include('users.partials.header', [
@@ -177,6 +179,7 @@
                 url: '{{route('save.profile.picture')}}',
             });
             location.reload();
+            $('#image_user').css('background-image', 'url(' + '{{ asset("/storage/profile/".' + document.getElementById("profile_pic").files[0] + ') }}' + ')');
         }
     </script>
 @endpush
