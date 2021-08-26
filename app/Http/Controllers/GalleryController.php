@@ -4,54 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use App\Models\Image as Images;
 
 class GalleryController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // $name = $request['file']->getClientOriginalName();
         $ext = $request['file']->getClientOriginalExtension();
         $name = Str::random(40).'.'.$ext;
 
-        $img = Image::make($request['file']->getRealPath())->encode('jpg', 0)->orientate();
-        $img->stream();
+        // $img = Image::make($request['file']->getRealPath())->encode('jpg', 0)->orientate();
+        // $img->stream();
 
-        Storage::disk('local')->put("public/packages/gallery/" . $name, $img, 'public');
-        
-        $path = "storage/packages/gallery/{$name}";
+        // Storage::disk('local')->put("public/packages/gallery/" . $name, $img, 'public');
+        $request['file']->storeAs('public/packages/gallery/', $name);
 
         return response()->json([
             "fileName" => $name,
         ]);
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         Images::where('image_id', $request->id)->delete();
         Storage::delete('public/packages/gallery/'.$request->val);
 
         return response()->json('Success');
     }
 
-    public function storedes(Request $request) {
+    public function storedes(Request $request)
+    {
         $ext = $request['file']->getClientOriginalExtension();
         $name = Str::random(40).'.'.$ext;
 
-        $img = Image::make($request['file']->getRealPath())->encode('jpg', 0)->orientate();
-        $img->stream();
+        // $img = Image::make($request['file']->getRealPath())->encode('jpg', 0)->orientate();
+        // $img->stream();
 
-        Storage::disk('local')->put("public/destinations/gallery/" . $name, $img, 'public');
-        
-        $path = "storage/destinations/gallery/{$name}";
+        // Storage::disk('local')->put("public/destinations/gallery/" . $name, $img, 'public');
+        $request['file']->storeAs('public/destinations/gallery/', $name);
 
         return response()->json([
             "fileName" => $name,
         ]);
     }
 
-    public function deletedes(Request $request) {
+    public function deletedes(Request $request)
+    {
         Images::where('image_id', $request->id)->delete();
         Storage::delete('public/destinations/gallery/'.$request->val);
 
