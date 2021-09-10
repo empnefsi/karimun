@@ -2,13 +2,12 @@
 
 @section('content')
 
-<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-1.jpeg') }}');">
+<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('storage/destinations/'. $destination_detail->images[0]->path) }}')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
         <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.php">Home</a></span> <span class="mr-2"><a href="destination.php">Destination</a></span> <span>Detail</span></p>
-          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Destination Details</h1>
+          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{{ $destination_detail->name }} Details</h1>
         </div>
       </div>
     </div>
@@ -16,32 +15,31 @@
 
   <section class="ftco-section ftco-degree-bg">
     <div class="container">
-      <div class="row">
 
+      <div class="row">
         <div class="col-md-12 ftco-animate">
             <div class="single-slider owl-carousel">
-                <div class="item">
-                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-2.jpeg') }}');"></div>
-                </div>
-                <div class="item">
-                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-3.jpeg') }}');"></div>
-                </div>
-                <div class="item">
-                    <div class="hotel-img" style="background-image: url('{{ asset('assets/img/guest-assets/destinations/photo-1.jpeg') }}');"></div>
-                </div>
+                @if (count($destination_detail->images) > 1)
+                    @foreach ($destination_detail->images as $image)
+                        <div class="item">
+                            <div class="hotel-img"
+                                style="background-image: url('{{ asset('storage/destinations/' . $image->path) }}');">
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
-        
+
         <div class="col-md-12 mt-4 mb-5 ftco-animate">
-          <h1 class="text-center">{{$detail->name}}</h1>
+          <h1 class="text-center">{{$destination_detail->name}}</h1>
           <div class="text-justify">
-            {!! $detail->description !!}
+            {!! $destination_detail->description !!}
           </div>
         </div>
 
         <div class="mx-auto">
-          {!! $detail->coordinate !!}
-
+          {!! $destination_detail->coordinate !!}
         </div>
 
       </div>
