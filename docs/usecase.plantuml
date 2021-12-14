@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+actor Admin as a
+actor User as u
+package "Karimun Managed" {
+  usecase "Destination Management" as UC1
+  usecase "News Management" as UC2
+  usecase "Package Management" as UC3
+  usecase "Melihat daftar destinasi" as UC4
+  usecase "Melihat daftar berita" as UC5
+  usecase "Melihat daftar paket" as UC6
+}
+a --> UC1
+a --> UC2
+a --> UC3
+u --> UC4
+u --> UC5
+u --> UC6
+@enduml
