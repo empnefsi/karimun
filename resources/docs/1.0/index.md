@@ -1,6 +1,7 @@
 - ## Get Started
 
   - [Overview](/{{route}}/{{version}}/overview)
+  - [Instalasi](/{{route}}/{{version}}/instalasi)
   - [Autentikasi](/{{route}}/{{version}}/autentikasi)
 
 - ## Manajemen Konten
@@ -9,3 +10,12 @@
   - [Destinasi Wisata](/{{route}}/{{version}}/manajemen-konten/destinasi)
   - [Berita](/{{route}}/{{version}}/manajemen-konten/berita)
   - [Paket Wisata](/{{route}}/{{version}}/manajemen-konten/paket)
+
+- ## Panduan Form
+
+  - [URL Lokasi](/{{route}}/{{version}}/panduan-form/url-lokasi)
+  - [Editor Deskripsi](/{{route}}/{{version}}/panduan-form/editor)
+
+- ## Maintenace
+
+  - [Diagram](/{{route}}/{{version}}/maintenace/diagram)
