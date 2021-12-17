@@ -14,7 +14,7 @@ return [
     */
 
     'docs'        => [
-        'route'   => '/docs',
+        'route'   => '/admin/docs',
         'path'    => '/resources/docs',
         'landing' => 'overview',
         'middleware' => ['web'],
@@ -55,7 +55,7 @@ return [
     */
 
     'settings'       => [
-        'auth'       => false,
+        'auth'       => true,
         'ga_id'      => '',
         'middleware' => [
             'web',
