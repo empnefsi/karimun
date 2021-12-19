@@ -59,7 +59,7 @@ Setelah konten dibuat, anda dapat melihatnya sama seperti dengan apa yang akan c
 
 <a name="edit"></a>
 
-## Megedit Konten
+## Mengedit Konten
 
 Ketika anda merasa tidak puas dengan konten yang telah dibuat, anda dapat melakukan perubahan pada konten tersebut. Data konten yang lama akan otomatis di isikan. Perubahan yang dilakukan tidak harus semuanya, cukup bagian yang anda rasa perlu diubah saja. Cara mengedit konten dari halaman admin adalah sebagai berikut
 

@@ -2,7 +2,7 @@
 
 ---
 
-- [Instalasi](#instalasi)
+- [Instalasi](#mulai-instalasi)
 
 <a name="prasyarat-instalasi"></a>
 
