@@ -1,4 +1,4 @@
-@startuml
+@startuml usecase
 left to right direction
 actor Admin as a
 actor User as u
