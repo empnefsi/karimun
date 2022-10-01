@@ -14,8 +14,8 @@
 - ## Panduan Form
 
   - [URL Lokasi](/{{route}}/{{version}}/panduan-form/url-lokasi)
-  - [Editor Deskripsi](/{{route}}/{{version}}/panduan-form/editor)
+  - [Editor Deskripsi](/{{route}}/{{version}}/panduan-form/edit-deskripsi)
 
 - ## Maintenace
 
-  - [Diagram](/{{route}}/{{version}}/maintenace/diagram)
+  - [Diagram](/{{route}}/{{version}}/Maintenance/diagram)

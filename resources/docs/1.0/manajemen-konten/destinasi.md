@@ -29,13 +29,13 @@ Konten destinasi disusun berdasarkan data yang dikumpulkan menggunakan form beri
 
   Berisi link lokasi wisata pada google maps
 
-> {info} Panduan mendapatkan url lokasi dapat dilihat [DI SINI](../url-lokasi)
+> {info} Panduan mendapatkan url lokasi dapat dilihat [DI SINI](../panduan-form/url-lokasi)
 
 - Description
 
   Anda dapat mendeskripsikan tempat wisata pada bagian ini. Disarankan deskripsi panjang dan mendetail mengenai kelebihan dan hal-hal apa yang dapat dilakukan pada wisata ini. Untuk menjaga minat calon turis diharpkan deskripsi dapat diisi lebih dari tiga paragraf. Terdapat beberapa fitur yang dapat digunakan seperti enter untuk membuat garis baru, bold, italic, pemberian judul seksi, link untuk menuju halaman web lain, dan quote untuk memberikan quote dari seseorang jika diperlukan.
 
-> {info} Panduan dan contoh pembuatan deskripsi dapat dilihat [DI SINI](../editor)
+> {info} Panduan dan contoh pembuatan deskripsi dapat dilihat [DI SINI](../panduan-form/edit-deskripsi)
 
 - Gallery:
 

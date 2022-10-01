@@ -33,3 +33,5 @@ Deskripsi merupakan sebuah informasi tambahan dari masing-masing konten yang dis
 - Number list dengan menekan tombol `numberin`.
 6. Jika sudah selesai, admin dapat langsung menekan tombol `Submit` di pojok kanan bawah.
 
+###Berlaku hal yang sama pada menu lainnya.
+

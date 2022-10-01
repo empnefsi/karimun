@@ -29,7 +29,7 @@ Konten destinasi disusun berdasarkan data yang dikumpulkan menggunakan form beri
 
   Anda dapat mendeskripsikan paket wisata pada bagian ini. Disarankan deskripsi panjang dan mendetail mengenai kelebihan dan hal-hal apa yang dapat dilakukan pada paket wisata ini. Untuk menjaga minat calon turis diharpkan deskripsi dapat diisi lebih dari tiga paragraf. Terdapat beberapa fitur yang dapat digunakan seperti enter untuk membuat garis baru, bold, italic, pemberian judul seksi, link untuk menuju halaman web lain, dan quote untuk memberikan quote dari seseorang jika diperlukan.
 
-> {info} Panduan dan contoh pembuatan deskripsi dapat dilihat [DI SINI](../editor)
+> {info} Panduan dan contoh pembuatan deskripsi dapat dilihat [DI SINI](../panduan-form/edit-deskripsi)
 
 - Gallery:
 
