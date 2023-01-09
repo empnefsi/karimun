@@ -25,6 +25,7 @@ services:
             - mariadb
     mariadb:
         image: 'mariadb:10'
+        #restart: always
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -35,6 +36,7 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - 'sailmariadb:/var/lib/mysql'
+            # - './scripts/my.cnf:/etc/mysql/my.cnf'
         networks:
             - sail
         healthcheck:

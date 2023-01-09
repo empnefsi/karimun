@@ -22,7 +22,7 @@ class ImageFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'path' => $this->faker->image(storage_path('app/public/news'), 2000, 1500, null, false),
+                'path' => $this->faker->image(storage_path('app/public/news'), 2000, 1500, null, false, true, null, false),
             ];
         });
     }
@@ -30,7 +30,7 @@ class ImageFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'path' => $this->faker->image(storage_path('app/public/packages'), 2000, 1500, null, false),
+                'path' => $this->faker->image(storage_path('app/public/packages'), 2000, 1500, null, false, true, null, false),
             ];
         });
     }
@@ -38,7 +38,7 @@ class ImageFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'path' => $this->faker->image(storage_path('app/public/destinations'), 2000, 1500, null, false),
+                'path' => $this->faker->image(storage_path('app/public/destinations'), 2000, 1500, null, false, true, null, false),
             ];
         });
     }
