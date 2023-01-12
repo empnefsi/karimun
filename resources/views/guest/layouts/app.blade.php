@@ -2,13 +2,13 @@
 <html lang="eng">
     <head>
         <title>Karimun</title>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-196403921-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8R82G7DJW"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'UA-196403921-1');
+            gtag('config', 'G-W8R82G7DJW');
         </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no">
